@@ -13,6 +13,19 @@ int main() {
 	std::cout << "This should display the first element of 1.\n\n";
 	std::cout << "Output: " << v1[0] << std::endl;
 
+	std::cout << "\nThis should loop and output the contents of the vector." << std::endl << std::endl;
+
+	for (auto& v : v1) {
+		std::cout << v << std::endl;
+	}
+
+	std::cout << "\n\nNow I will add an element to the end of  the vector and display the output." << std::endl;
+
+	std::cout << "Appending..." << std::endl << std::endl;
+	v1.push_back(10);
+
+	std::cout << v1.back() << std::endl << std::endl;
+
 	system("PAUSE");
 	
 	return 0;
