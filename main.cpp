@@ -19,8 +19,12 @@ int main() {
 	std::cout << "Now to test out my custom class!!" << std::endl << std::endl;
 
 	hero myhero;
-
 	std::cout << myhero.getName() << std::endl << std::endl;
+	
+	std::cout << "Declare a second hero with starting values" << std::endl << std::endl;
+
+	hero myhero2("Bob", "Morph", 10, 12, 6);
+	std::cout << myhero2.getName() << std::endl << std::endl;
 
 	system("PAUSE");
 
