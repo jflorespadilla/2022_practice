@@ -26,6 +26,11 @@ int main() {
 	hero myhero2("Bob", "Morph", 10, 12, 6);
 	std::cout << myhero2.getName() << std::endl << std::endl;
 
+	std::cout << "Testing the use of a copy constructor" << std::endl << std::endl;
+
+	hero myhero3(myhero2);
+	std::cout << myhero3.getName() << std::endl << std::endl;
+
 	system("PAUSE");
 
 	return 0;
