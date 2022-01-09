@@ -28,8 +28,17 @@ int main() {
 
 	std::cout << "Testing the use of a copy constructor" << std::endl << std::endl;
 
-	hero myhero3(myhero2);
+	hero myhero3 = myhero2;
 	std::cout << myhero3.getName() << std::endl << std::endl;
+
+	std::cout << "Now I will attempt to make a vector of heroes" << std::endl << std::endl;
+
+	std::vector<hero> myheroVector{myhero, myhero2, myhero3};
+
+	for (auto v : myheroVector) {
+		std::cout << "Hero Name: " << v.getName() << std::endl;
+	}
+	std::cout << std::endl << std::endl;
 
 	system("PAUSE");
 

@@ -16,12 +16,12 @@ hero::hero(std::string name, std::string ability, int health, int defense, int a
 	this->attackDamage = attackDamage;
 }
 
-hero::hero(hero& createdHero) {
-	name = createdHero.getName();
-	ability = createdHero.getAbility();
-	health = createdHero.getHealth();
-	defense = createdHero.getDefense();
-	attackDamage = createdHero.getAttackDamage();
+hero::hero(const hero& createdHero) {
+	name = createdHero.name;
+	ability = createdHero.ability;
+	health = createdHero.health;
+	defense = createdHero.defense;
+	attackDamage = createdHero.attackDamage;
 }
 
 hero::~hero() {

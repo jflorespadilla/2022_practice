@@ -6,7 +6,7 @@ class hero {
 public:
 	hero();
 	hero(std::string name, std::string ability, int health, int defense, int attackDamage);
-	hero(hero& createdHero);
+	hero(const hero& createdHero);
 	~hero();
 
 	std::string getName();
