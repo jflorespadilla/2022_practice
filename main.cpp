@@ -40,6 +40,22 @@ int main() {
 	}
 	std::cout << std::endl << std::endl;
 
+	std::cout << "Names will be updated..." << std::endl << std::endl;
+
+	int count = 1;
+
+
+	// Need to fix this. Should be done tomorrow.
+	for (auto v : myheroVector) {
+		v.setName(std::string("Hero ") + char (count));
+		count++;
+	}
+
+	for (auto v : myheroVector) {
+		std::cout << "Hero Name: " << v.getName() << std::endl;
+	}
+	std::cout << std::endl << std::endl;
+
 	system("PAUSE");
 
 	return 0;
