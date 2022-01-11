@@ -43,11 +43,17 @@ int main() {
 	std::cout << "Names will be updated..." << std::endl << std::endl;
 
 	int count = 1;
+	char countChar;
 
+	for (int i = 0; i < myheroVector.size(); i++) {
+		std::cout << "Updating... ";
 
-	// Need to fix this. Should be done tomorrow.
-	for (auto v : myheroVector) {
-		v.setName(std::string("Hero ") + char (count));
+		std::string heroName = "Hero ";
+		countChar = char(count + 96);
+		heroName.push_back(countChar);
+		myheroVector[i].setName(heroName);
+		std::cout << myheroVector[i].getName() << std::endl;
+
 		count++;
 	}
 
