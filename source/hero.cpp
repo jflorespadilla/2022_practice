@@ -71,3 +71,7 @@ void hero::setDefense(int defenseVal) {
 void hero::setAttackDamage(int attackDamageVal) {
 	attackDamage = attackDamageVal;
 }
+
+void hero::attackCharacter(Character& otherCharacter) {
+	otherCharacter.setHealth(otherCharacter.getHealth() - attackDamage);
+}

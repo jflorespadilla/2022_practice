@@ -59,3 +59,7 @@ void Enemy::setHealth(int healthVal) {
 void Enemy::setAttackDamage(int attackDamageVal) {
 	attackDamage = attackDamageVal;
 }
+
+void Enemy::attackCharacter(Character& otherCharacter) {
+	otherCharacter.setHealth(otherCharacter.getHealth() - attackDamage);
+}

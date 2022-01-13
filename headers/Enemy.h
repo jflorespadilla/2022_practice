@@ -1,8 +1,9 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include "Character.h"
 
-class Enemy {
+class Enemy : public Character {
 	public:
 		Enemy();
 		Enemy(const Enemy& createdEnemy);
@@ -18,6 +19,8 @@ class Enemy {
 		void setAbility(std::string abilityVal);
 		void setHealth(int healthVal);
 		void setAttackDamage(int attackDamageVal);
+
+		void attackCharacter(Character& otherCharacter);
 
 	private:
 		std::string name;

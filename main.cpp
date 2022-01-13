@@ -43,14 +43,12 @@ int main() {
 	std::cout << "Names will be updated..." << std::endl << std::endl;
 
 	int count = 1;
-	char countChar;
 
-	for (int i = 0; i < myheroVector.size(); i++) {
+	for (unsigned int i = 0; i < myheroVector.size(); i++) {
 		std::cout << "Updating... ";
 
 		std::string heroName = "Hero ";
-		countChar = char(count + 96);
-		heroName.push_back(countChar);
+		heroName.push_back(char(count + 96));
 		myheroVector[i].setName(heroName);
 		std::cout << myheroVector[i].getName() << std::endl;
 

@@ -145,6 +145,7 @@
     <ClCompile Include="source\vectorFunctions.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="headers\Character.h" />
     <ClInclude Include="headers\Enemy.h" />
     <ClInclude Include="headers\hero.h" />
     <ClInclude Include="headers\vectorFunctions.h" />
