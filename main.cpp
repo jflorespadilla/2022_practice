@@ -1,7 +1,9 @@
 #include <iostream>
 #include <vector>
 #include "headers/vectorFunctions.h"
+#include "headers/Character.h"
 #include "headers/hero.h"
+#include "headers/Enemy.h"
 
 int main() {
 	greetings();
@@ -59,6 +61,12 @@ int main() {
 		std::cout << "Hero Name: " << v.getName() << std::endl;
 	}
 	std::cout << std::endl << std::endl;
+
+	Enemy enemy1("Goblin", "Bite", 6, 2);
+	std::cout << "Goblin health: " << enemy1.getHealth() << std::endl;
+	myheroVector[1].attackCharacter(enemy1);
+
+	std::cout << "Goblin health: " << enemy1.getHealth() << std::endl << std::endl;
 
 	system("PAUSE");
 
