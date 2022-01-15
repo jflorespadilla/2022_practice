@@ -17,7 +17,7 @@ int main() {
 	displayVectorContents(v1);
 	appendToVector(v1, 12);
 
-	// Testing out my custom class
+	// Testing out my custom classes
 	std::cout << "Now to test out my custom class!!" << std::endl << std::endl;
 
 	hero myhero;
@@ -64,9 +64,28 @@ int main() {
 
 	Enemy enemy1("Goblin", "Bite", 6, 2);
 	std::cout << "Goblin health: " << enemy1.getHealth() << std::endl;
-	myheroVector[1].attackCharacter(enemy1);
+	std::cout << "Is " << enemy1.getName() << " alive? ";
 
-	std::cout << "Goblin health: " << enemy1.getHealth() << std::endl << std::endl;
+	if (enemy1.checkIfAlive()) {
+		std::cout << "Yes!" << std::endl;
+	}
+	else {
+		std::cout << "No" << std::endl;
+	}
+
+	myheroVector[1].attackCharacter(enemy1);
+	std::cout << myheroVector[1].getName() << " attacked " << enemy1.getName() << "!" << std::endl;
+
+	std::cout << "Goblin health: " << enemy1.getHealth() << std::endl;
+	std::cout << "Is " << enemy1.getName() << " alive? ";
+
+	if (enemy1.checkIfAlive()) {
+		std::cout << "Yes!" << std::endl;
+	}
+	else {
+		std::cout << "No" << std::endl;
+	}
+	std::cout << std::endl;
 
 	system("PAUSE");
 

@@ -13,6 +13,7 @@ public:
 	virtual void setAbility(std::string abilityVal) { ability = abilityVal; };
 	virtual void setHealth(int healthVal) { health = healthVal; };
 	virtual void setAttackDamage(int attackDamageVal) { attackDamage = attackDamageVal; };
+	virtual bool checkIfAlive() { return true; };
 
 private:
 	std::string name;

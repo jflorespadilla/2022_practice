@@ -75,3 +75,10 @@ void hero::setAttackDamage(int attackDamageVal) {
 void hero::attackCharacter(Character& otherCharacter) {
 	otherCharacter.setHealth(otherCharacter.getHealth() - attackDamage);
 }
+
+bool hero::checkIfAlive() {
+	if (health <= 0) {
+		return false;
+	}
+	return true;
+}

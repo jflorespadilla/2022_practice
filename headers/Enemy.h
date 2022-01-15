@@ -21,11 +21,14 @@ class Enemy : public Character {
 		void setAttackDamage(int attackDamageVal);
 
 		void attackCharacter(Character& otherCharacter);
+		bool checkIfAlive();
+
 
 	private:
 		std::string name;
 		std::string ability;
 		int health;
 		int attackDamage;
+		bool isAlive;
 };
 

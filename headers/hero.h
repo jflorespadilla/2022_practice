@@ -23,6 +23,7 @@ public:
 	void setAttackDamage(int attackDamageVal);
 
 	void attackCharacter( Character& otherCharacter);
+	bool checkIfAlive();
 
 private:
 	std::string name;
@@ -30,5 +31,6 @@ private:
 	int health;
 	int defense;
 	int attackDamage;
+	bool isAlive;
 };
 

@@ -63,3 +63,10 @@ void Enemy::setAttackDamage(int attackDamageVal) {
 void Enemy::attackCharacter(Character& otherCharacter) {
 	otherCharacter.setHealth(otherCharacter.getHealth() - attackDamage);
 }
+
+bool Enemy::checkIfAlive() {
+	if (health <= 0) {
+		return false;
+	}
+	return true;
+}
