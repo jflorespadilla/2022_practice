@@ -141,14 +141,14 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="source\Enemy.cpp" />
+    <ClCompile Include="source\Game.cpp" />
     <ClCompile Include="source\hero.cpp" />
-    <ClCompile Include="source\vectorFunctions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\Character.h" />
     <ClInclude Include="headers\Enemy.h" />
+    <ClInclude Include="headers\Game.h" />
     <ClInclude Include="headers\hero.h" />
-    <ClInclude Include="headers\vectorFunctions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
