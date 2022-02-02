@@ -17,6 +17,18 @@ void Game::run() {
 	while (!quit) {
 		std::cout << "Your character is " << character->getName() << std::endl <<std::endl; 
 
+		Enemy enemy;
+		std::cout << "Your enemy is " << enemy.getName() << std::endl << std::endl;
+
+		std::cout << "Enter Combat?\nY) Yes\nN) No" << std::endl;
+		std::cin >> input;
+
+		if (input == 'n' || input == 'N') {
+			std::cout << "-----COMBAT ENTERED!!!-----" << std::endl << std::endl;
+
+			std::cout << " You attacked the enemy!!!\nEnemy Health: ";
+		}
+
 		std::cout << "Game is running. Press Q to Quit" << std::endl << std::endl;
 		std::cin >> input;
 		if (input == 'q' || input == 'Q') {
