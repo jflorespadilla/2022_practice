@@ -23,10 +23,15 @@ void Game::run() {
 		std::cout << "Enter Combat?\nY) Yes\nN) No" << std::endl;
 		std::cin >> input;
 
-		if (input == 'n' || input == 'N') {
+		if (input == 'y' || input == 'Y') {
 			std::cout << "-----COMBAT ENTERED!!!-----" << std::endl << std::endl;
 
-			std::cout << " You attacked the enemy!!!\nEnemy Health: ";
+			while (character->checkIfAlive() && enemy.checkIfAlive()) {
+				std::cout << "Your Health: " << character->getHealth() << "\n Enemy Health: " << enemy.getHealth() << std::endl;
+
+				character->attackCharacter(enemy);
+				std::cout << " You attacked the enemy!!!\nEnemy Health: " << enemy.getHealth() << std::endl;
+			}
 		}
 
 		std::cout << "Game is running. Press Q to Quit" << std::endl << std::endl;

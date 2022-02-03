@@ -15,7 +15,7 @@ public:
 
 private:
 	bool quit;
-	std::shared_ptr<Character> character;
+	std::shared_ptr<hero> character;
 	std::vector<Enemy> enemies;
 
 };
