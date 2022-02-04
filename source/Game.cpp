@@ -9,6 +9,9 @@ Game::~Game() {
 }
 
 void Game::run() {
+	srand(time(NULL));
+	int roll;
+
 	if (character.get() == NULL) {
 		createCharacter();
 	}
@@ -27,10 +30,27 @@ void Game::run() {
 			std::cout << "-----COMBAT ENTERED!!!-----" << std::endl << std::endl;
 
 			while (character->checkIfAlive() && enemy.checkIfAlive()) {
-				std::cout << "Your Health: " << character->getHealth() << "\n Enemy Health: " << enemy.getHealth() << std::endl;
+				std::cout << "Rolling dice!\nRoll: ";
+				roll = rand() % 20 + 1;
 
-				character->attackCharacter(enemy);
-				std::cout << " You attacked the enemy!!!\nEnemy Health: " << enemy.getHealth() << std::endl;
+				std::cout << roll << std::endl;
+
+				std::cout << "Your Health: " << character->getHealth() << "\nEnemy Health: " << enemy.getHealth() << std::endl << std::endl;
+
+				if (roll >= 12) {
+					character->attackCharacter(enemy);
+					std::cout << "You attacked the enemy!!!" << std::endl << std::endl;
+				}
+				else {
+					enemy.attackCharacter(*character);
+					std::cout << "Enemy has attacked you!" << std::endl << std::endl;
+				}
+			}
+			if (character->checkIfAlive()) {
+				std::cout << "You've conqured your enemy!!" << std::endl << std::endl;
+			}
+			else {
+				std::cout << "Your enemy has vanqueshed you!!" << std::endl << std::endl;
 			}
 		}
 

@@ -5,6 +5,8 @@
 #include "Character.h"
 #include "hero.h"
 #include "Enemy.h"
+#include <stdlib.h>
+#include <time.h>
 
 class Game {
 public:
