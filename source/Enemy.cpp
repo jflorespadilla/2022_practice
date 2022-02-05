@@ -60,8 +60,24 @@ void Enemy::setAttackDamage(int attackDamageVal) {
 	attackDamage = attackDamageVal;
 }
 
-void Enemy::attackCharacter(Character& otherCharacter) {
-	otherCharacter.setHealth(otherCharacter.getHealth() - attackDamage);
+void Enemy::attackCharacter(Character* otherCharacter) {
+	if (otherCharacter == NULL) {
+		std::cerr << "WARNING: Chracter object missing. Data leak" << std::endl;
+		return;
+	}
+	otherCharacter->setHealth(otherCharacter->getHealth() - attackDamage);
+}
+
+void Enemy::attackCharacter(hero* heroCharacter) {
+	if (heroCharacter == NULL) {
+		std::cerr << "WARNING: Chracter object missing. Data leak" << std::endl;
+		return;
+	}
+
+	if (heroCharacter->getDefense() > attackDamage) {
+		heroCharacter->setHealth(heroCharacter->getHealth() - (attackDamage - (attackDamage / heroCharacter->getDefense())));
+	}
+	heroCharacter->setHealth(heroCharacter->getHealth() - attackDamage);
 }
 
 bool Enemy::checkIfAlive() {

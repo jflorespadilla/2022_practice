@@ -42,7 +42,7 @@ void Game::run() {
 					std::cout << "You attacked the enemy!!!" << std::endl << std::endl;
 				}
 				else {
-					enemy.attackCharacter(*character);
+					enemy.attackCharacter(character.get());
 					std::cout << "Enemy has attacked you!" << std::endl << std::endl;
 				}
 			}

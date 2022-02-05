@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include "Character.h"
+#include "hero.h"
 
 class Enemy : public Character {
 	public:
@@ -20,7 +21,8 @@ class Enemy : public Character {
 		void setHealth(int healthVal);
 		void setAttackDamage(int attackDamageVal);
 
-		void attackCharacter(Character& otherCharacter);
+		void attackCharacter(Character* otherCharacter);
+		void attackCharacter(hero* heroCharacter);
 		bool checkIfAlive();
 
 
