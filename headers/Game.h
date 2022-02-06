@@ -14,6 +14,7 @@ public:
 	~Game();
 	void run();
 	void createCharacter();
+	void runCombat(Enemy& targetEnemy);
 
 private:
 	bool quit;
