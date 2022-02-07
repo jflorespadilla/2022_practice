@@ -57,10 +57,13 @@ void Game::createCharacter() {
 
 void Game::runCombat(Enemy& targetEnemy) {
 	srand(time(NULL));
+	char input;
 	int roll;
+	bool continueCombat = true;
+
 	std::cout << "-----COMBAT ENTERED!!!-----" << std::endl << std::endl;
 
-	while (character->checkIfAlive() && targetEnemy.checkIfAlive()) {
+	while (character->checkIfAlive() && targetEnemy.checkIfAlive() && continueCombat) {
 		std::cout << "Rolling dice!\nRoll: ";
 		roll = rand() % 20 + 1;
 
@@ -76,12 +79,23 @@ void Game::runCombat(Enemy& targetEnemy) {
 			targetEnemy.attackCharacter(character.get());
 			std::cout << "Enemy has attacked you!" << std::endl << std::endl;
 		}
+
+		std::cout << "Continue combat? (Y/N) ";
+		std::cin >> input;
+
+		if (input == 'N' || input == 'n') {
+			continueCombat = false;
+		}
 	}
-	if (character->checkIfAlive()) {
+
+	if (character->checkIfAlive() && continueCombat) {
 		std::cout << "You've conqured your enemy!!" << std::endl << std::endl;
 	}
-	else {
+	else if (targetEnemy.checkIfAlive() && continueCombat) {
 		std::cout << "Your enemy has vanqueshed you!!" << std::endl << std::endl;
+	}
+	else {
+		std::cout << "You have fled combat!" << std::endl << std::endl;
 	}
 }
 
