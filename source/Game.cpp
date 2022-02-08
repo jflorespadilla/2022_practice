@@ -14,6 +14,7 @@ void Game::run() {
 	}
 
 	char input;
+	srand(time(NULL));
 	while (!quit) {
 		std::cout << "Your character is " << character->getName() << std::endl <<std::endl; 
 
@@ -56,17 +57,14 @@ void Game::createCharacter() {
 }
 
 void Game::runCombat(Enemy& targetEnemy) {
-	srand(time(NULL));
 	char input;
-	int roll;
+	int roll, diceSize=20;
 	bool continueCombat = true;
 
 	std::cout << "-----COMBAT ENTERED!!!-----" << std::endl << std::endl;
 
 	while (character->checkIfAlive() && targetEnemy.checkIfAlive() && continueCombat) {
-		std::cout << "Rolling dice!\nRoll: ";
-		roll = rand() % 20 + 1;
-
+		roll = rollDice(diceSize);
 		std::cout << roll << std::endl;
 
 		std::cout << "Your Health: " << character->getHealth() << "\nEnemy Health: " << targetEnemy.getHealth() << std::endl << std::endl;
@@ -97,5 +95,12 @@ void Game::runCombat(Enemy& targetEnemy) {
 	else {
 		std::cout << "You have fled combat!" << std::endl << std::endl;
 	}
+}
+
+int Game::rollDice(int diceSize) {
+	int roll;
+	std::cout << "Rolling dice!\nRoll: ";
+	roll = rand() % diceSize + 1;
+	return roll;
 }
 
