@@ -16,6 +16,7 @@ public:
 	void createCharacter();
 	void runCombat(Enemy& targetEnemy);
 	int rollDice(int diceSize);
+	void gameOver();
 
 private:
 	bool quit;

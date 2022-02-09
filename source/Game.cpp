@@ -27,12 +27,7 @@ void Game::run() {
 		if (input == 'y' || input == 'Y') {
 			runCombat(enemy);
 		}
-
-		std::cout << "Game is running. Press Q to Quit" << std::endl << std::endl;
-		std::cin >> input;
-		if (input == 'q' || input == 'Q') {
-			quit = true;
-		}
+		gameOver();
 	}
 }
 
@@ -104,3 +99,11 @@ int Game::rollDice(int diceSize) {
 	return roll;
 }
 
+void Game::gameOver() {
+	char input;
+	std::cout << "Game Over.\nTry Again?\n(Y/N): ";
+	std::cin >> input;
+	if (input == 'n' || input == 'N') {
+		quit = true;
+	}
+}
