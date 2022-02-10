@@ -18,7 +18,7 @@ void Game::run() {
 	while (!quit) {
 		std::cout << "Your character is " << character->getName() << std::endl <<std::endl; 
 
-		Enemy enemy;
+		Enemy enemy("Lizard", "Slash", 12, 4);
 		std::cout << "Your enemy is " << enemy.getName() << std::endl << std::endl;
 
 		std::cout << "Enter Combat?\nY) Yes\nN) No" << std::endl;
@@ -105,5 +105,7 @@ void Game::gameOver() {
 	std::cin >> input;
 	if (input == 'n' || input == 'N') {
 		quit = true;
+		return;
 	}
+	character->revive();
 }

@@ -4,6 +4,7 @@ hero::hero() {
 	name = "default";
 	ability = "none";
 	health = 10;
+	maxHealth = health;
 	defense = 20;
 	attackDamage = 5;
 }
@@ -12,6 +13,7 @@ hero::hero(std::string name, std::string ability, int health, int defense, int a
 	this->name = name;
 	this->ability = ability;
 	this->health = health;
+	maxHealth = this->health;
 	this->defense = defense;
 	this->attackDamage = attackDamage;
 }
@@ -20,6 +22,7 @@ hero::hero(const hero& createdHero) {
 	name = createdHero.name;
 	ability = createdHero.ability;
 	health = createdHero.health;
+	maxHealth = createdHero.maxHealth;
 	defense = createdHero.defense;
 	attackDamage = createdHero.attackDamage;
 }
@@ -81,4 +84,9 @@ bool hero::checkIfAlive() {
 		return false;
 	}
 	return true;
+}
+
+void hero::revive() {
+	health = maxHealth;
+	isAlive = true;
 }

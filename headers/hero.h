@@ -24,11 +24,13 @@ public:
 
 	void attackCharacter( Character& otherCharacter);
 	bool checkIfAlive();
+	void revive();
 
 private:
 	std::string name;
 	std::string ability;
 	int health;
+	int maxHealth;
 	int defense;
 	int attackDamage;
 	bool isAlive;
