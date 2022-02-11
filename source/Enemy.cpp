@@ -80,6 +80,21 @@ void Enemy::attackCharacter(hero* heroCharacter) {
 	heroCharacter->setHealth(heroCharacter->getHealth() - attackDamage);
 }
 
+void Enemy::attackCharacter(hero* heroCharacter, int roll) {
+	if (heroCharacter == NULL) {
+		std::cerr << "WARNING: Chracter object missing. Data leak" << std::endl;
+		return;
+	}
+	if (roll > 14) {
+		if (heroCharacter->getDefense() > attackDamage) {
+			heroCharacter->setHealth(heroCharacter->getHealth() - (attackDamage - (attackDamage / heroCharacter->getDefense())));
+		}
+		heroCharacter->setHealth(heroCharacter->getHealth() - attackDamage);
+		return;
+	}
+	std::cout << "****Enemy missed attack!!****" << std::endl << std::endl;
+}
+
 bool Enemy::checkIfAlive() {
 	if (health <= 0) {
 		return false;

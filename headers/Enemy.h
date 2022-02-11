@@ -23,6 +23,7 @@ class Enemy : public Character {
 
 		void attackCharacter(Character* otherCharacter);
 		void attackCharacter(hero* heroCharacter);
+		void attackCharacter(hero* heroCharacter, int roll);
 		bool checkIfAlive();
 
 

@@ -23,6 +23,7 @@ public:
 	void setAttackDamage(int attackDamageVal);
 
 	void attackCharacter( Character& otherCharacter);
+	void attackCharacter(Character& otherCharacter, int roll);
 	bool checkIfAlive();
 	void revive();
 

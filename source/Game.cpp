@@ -63,15 +63,17 @@ void Game::runCombat(Enemy& targetEnemy) {
 		std::cout << roll << std::endl;
 
 		std::cout << "Your Health: " << character->getHealth() << "\nEnemy Health: " << targetEnemy.getHealth() << std::endl << std::endl;
-
-		if (roll >= 14) {
-			character->attackCharacter(targetEnemy);
-			std::cout << "You attacked the enemy!!!" << std::endl << std::endl;
+		std::cout << "Attack? (Y/N): ";
+		std::cin >> input;
+		switch (input) {
+		case 'y':
+		case 'Y':
+			character->attackCharacter(targetEnemy, roll);
+			break;
 		}
-		else {
-			targetEnemy.attackCharacter(character.get());
-			std::cout << "Enemy has attacked you!" << std::endl << std::endl;
-		}
+		roll = rollDice(diceSize);
+		targetEnemy.attackCharacter(character.get(), roll);
+		std::cout << "Enemy has attacked you!" << std::endl << std::endl;
 
 		std::cout << "Continue combat? (Y/N) ";
 		std::cin >> input;

@@ -79,6 +79,15 @@ void hero::attackCharacter(Character& otherCharacter) {
 	otherCharacter.setHealth(otherCharacter.getHealth() - attackDamage);
 }
 
+void hero::attackCharacter(Character& otherCharacter, int roll) {
+	if (roll > 12) {
+		std::cout << "You attacked the enemy!!!" << std::endl << std::endl;
+		otherCharacter.setHealth(otherCharacter.getHealth() - attackDamage);
+		return;
+	}
+	std::cout << "****Attack missed!****" << std::endl << std::endl;
+}
+
 bool hero::checkIfAlive() {
 	if (health <= 0) {
 		return false;
