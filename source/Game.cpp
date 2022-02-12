@@ -71,9 +71,15 @@ void Game::runCombat(Enemy& targetEnemy) {
 			character->attackCharacter(targetEnemy, roll);
 			break;
 		}
-		roll = rollDice(diceSize);
-		targetEnemy.attackCharacter(character.get(), roll);
-		std::cout << "Enemy has attacked you!" << std::endl << std::endl;
+
+		if (rollDice(100) > 60) {
+			roll = rollDice(diceSize);
+			targetEnemy.attackCharacter(character.get(), roll);
+			std::cout << "Enemy has attacked you!" << std::endl << std::endl;
+		}
+		else {
+			std::cout << "Enemy hesitates and hisses at you" << std::endl << std::endl;
+		}
 
 		std::cout << "Continue combat? (Y/N) ";
 		std::cin >> input;
