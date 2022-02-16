@@ -54,13 +54,11 @@ void Game::createCharacter() {
 void Game::runCombat(Enemy& targetEnemy) {
 	char input;
 	int roll, diceSize=20;
-	bool continueCombat = true;
 
 	std::cout << "-----COMBAT ENTERED!!!-----" << std::endl << std::endl;
 
-	while (character->checkIfAlive() && targetEnemy.checkIfAlive() && continueCombat) {
+	while (character->checkIfAlive() && targetEnemy.checkIfAlive()) {
 		roll = rollDice(diceSize);
-		std::cout << roll << std::endl;
 
 		std::cout << "Your Health: " << character->getHealth() << "\nEnemy Health: " << targetEnemy.getHealth() << std::endl << std::endl;
 		std::cout << "Attack? (Y/N): ";
@@ -72,24 +70,26 @@ void Game::runCombat(Enemy& targetEnemy) {
 			break;
 		}
 
-		combatEnemyAttackCharacter(character.get(), &targetEnemy, diceSize);
-
-		std::cout << "Continue combat? (Y/N) ";
-		std::cin >> input;
-
-		if (input == 'N' || input == 'n') {
-			continueCombat = false;
+		if (targetEnemy.checkIfAlive()) {
+			combatEnemyAttackCharacter(character.get(), &targetEnemy, diceSize);
 		}
-	}
+		else {
+			std::cout << "You've conqured your enemy!!" << std::endl << std::endl;
+			return;
+		}
 
-	if (character->checkIfAlive() && continueCombat) {
-		std::cout << "You've conqured your enemy!!" << std::endl << std::endl;
-	}
-	else if (targetEnemy.checkIfAlive() && continueCombat) {
-		std::cout << "Your enemy has vanqueshed you!!" << std::endl << std::endl;
-	}
-	else {
-		std::cout << "You have fled combat!" << std::endl << std::endl;
+		if (character->checkIfAlive()) {
+			std::cout << "Continue combat? (Y/N) ";
+			std::cin >> input;
+			if (input == 'N' || input == 'n') {
+				std::cout << "You have fled combat!" << std::endl << std::endl;
+				return;
+			}
+		}
+		else {
+			std::cout << "Your enemy has vanqueshed you!!" << std::endl << std::endl;
+			return;
+		}
 	}
 }
 
@@ -98,7 +98,6 @@ void Game::combatEnemyAttackCharacter(hero* mc, Enemy* enemy, int diceSize) {
 	if (rollDice(100) > 60) {
 		roll = rollDice(diceSize);
 		enemy->attackCharacter(mc, roll);
-		std::cout << "Enemy has attacked you!" << std::endl << std::endl;
 	}
 	else {
 		std::cout << "Enemy hesitates and hisses at you" << std::endl << std::endl;
@@ -107,7 +106,6 @@ void Game::combatEnemyAttackCharacter(hero* mc, Enemy* enemy, int diceSize) {
 
 int Game::rollDice(int diceSize) {
 	int roll;
-	std::cout << "Rolling dice!\nRoll: ";
 	roll = rand() % diceSize + 1;
 	return roll;
 }
