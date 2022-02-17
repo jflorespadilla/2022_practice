@@ -18,6 +18,12 @@ void Game::run() {
 	while (!quit) {
 		std::cout << "Your character is " << character->getName() << std::endl <<std::endl; 
 
+		// TODO -  Think about sequence scenarios
+			// Action sequences
+			// Combat sequence
+			// Noncombat sequence
+
+
 		Enemy enemy("Lizard", "Slash", 12, 4);
 		std::cout << "Your enemy is " << enemy.getName() << std::endl << std::endl;
 
@@ -32,7 +38,6 @@ void Game::run() {
 }
 
 void Game::createCharacter() {
-	std::cout << "This is the create character function" << std::endl << std::endl;
 	std::string name, ability;
 	int health, defense, attackDamage;
 
