@@ -15,6 +15,7 @@ public:
 	void run();
 	void createCharacter();
 	void runCombat(Enemy& targetEnemy);
+	void runActionSequence();
 	void combatEnemyAttackCharacter(hero* mc, Enemy* enemy, int diceSize);
 	int rollDice(int diceSize);
 	void gameOver();

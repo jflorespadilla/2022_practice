@@ -98,6 +98,16 @@ void Game::runCombat(Enemy& targetEnemy) {
 	}
 }
 
+void Game::runActionSequence() {
+	// Establish chracter attributes
+		// Position
+		// Available actions
+	// Establish environment
+		// Terrain
+		// Interactive objects
+	// Load actions
+}
+
 void Game::combatEnemyAttackCharacter(hero* mc, Enemy* enemy, int diceSize) {
 	int roll;
 	if (rollDice(100) > 60) {
