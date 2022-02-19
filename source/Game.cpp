@@ -99,6 +99,7 @@ void Game::runCombat(Enemy& targetEnemy) {
 }
 
 void Game::runActionSequence() {
+	// Build map
 	// Establish chracter attributes
 		// Position
 		// Available actions
