@@ -1,12 +1,13 @@
 #pragma once
-class GameMap {
-public:
-	// Coordinates
-	// Terrain values
-	// Features
-private:
-	// Calling functions
 
-	// Starting late night code bindge
+enum Terrain_Type {sand, stone, grass, swamp, marsh, forrest, jungle, mountain};
+
+class GameMap {
+	public:
+		
+	private:
+		int yMax, xMax;
+		// Figure out how to integrate the terrain type to this class
 };
+
 
