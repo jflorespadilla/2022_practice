@@ -6,6 +6,8 @@ GameMap::GameMap(int x, int y) {
     coordinateCells.resize(yMax * xMax);
     
     // Generate Default Map
+        // Loop iteratively
+        // Set the coordinates
 }
 
 GameMap::~GameMap() {
