@@ -6,8 +6,12 @@ GameMap::GameMap(int x, int y) {
     coordinateCells.resize(yMax * xMax);
     
     // Generate Default Map
-        // Loop iteratively
-        // Set the coordinates
+    for (int cellCount = 0; cellCount < yMax * xMax; cellCount++) {
+        coordinateCells[cellCount].x = 1; // stub input. Need to figure out a way to insert correct coordinate value
+        coordinateCells[cellCount].y = 1; // stub input. Need to figure out a way to insert correct coordinate value
+        coordinateCells[cellCount].terrain = Terrain_Type::cellCount % 8; // stub input. Need to figure out a way to insert correct coordinate value
+
+    }
 }
 
 GameMap::~GameMap() {
