@@ -6,11 +6,48 @@ GameMap::GameMap(int x, int y) {
     coordinateCells.resize(yMax * xMax);
     
     // Generate Default Map
+    int xCoord = 0;
+    int yCoord = 0;
+    CoordinateCell cell;
+    
     for (int cellCount = 0; cellCount < yMax * xMax; cellCount++) {
-        coordinateCells[cellCount].x = 1; // stub input. Need to figure out a way to insert correct coordinate value
-        coordinateCells[cellCount].y = 1; // stub input. Need to figure out a way to insert correct coordinate value
-        coordinateCells[cellCount].terrain = Terrain_Type::cellCount % 8; // stub input. Need to figure out a way to insert correct coordinate value
+        cell.x = xCoord;
+        cell.y = yCoord;
+        switch (cellCount % 8) {
+        case 0:
+            cell.terrain = sand;
+            break;
+        case 1:
+            cell.terrain = stone;
+            break;
+        case 2:
+            cell.terrain = grass;
+            break;
+        case 3:
+            cell.terrain = swamp;
+            break;
+        case 4:
+            cell.terrain = marsh;
+            break;
+        case 5:
+            cell.terrain = forrest;
+            break;
+        case 6:
+            cell.terrain = jungle;
+            break;
+        case 7:
+            cell.terrain = mountain;
+            break;
+        }
+        coordinateCells.push_back(cell);
 
+        if (xCoord < xMax) {
+            xCoord++;
+        }
+        else if (yCoord < yMax) {
+            xCoord = 0;
+            yCoord++;
+        }
     }
 }
 
