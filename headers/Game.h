@@ -5,6 +5,7 @@
 #include "Character.h"
 #include "hero.h"
 #include "Enemy.h"
+#include "GameMap.h"
 #include <stdlib.h>
 #include <time.h>
 
@@ -24,6 +25,6 @@ private:
 	bool quit;
 	std::shared_ptr<hero> character;
 	std::vector<Enemy> enemies;
-
+	GameMap gameMap;
 };
 
