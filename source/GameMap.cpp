@@ -49,6 +49,8 @@ GameMap::GameMap(int x, int y) {
             yCoord++;
         }
     }
+    playerCursor.x = xMax / 2;
+    playerCursor.y = yMax / 2;
 }
 
 GameMap::~GameMap() {

@@ -8,6 +8,10 @@ struct CoordinateCell {
 	Terrain_Type terrain;
 };
 
+struct Cursor {
+	int x,y;
+};
+
 class GameMap {
 	public:
 		GameMap(int x=10, int y=10);
@@ -17,6 +21,7 @@ class GameMap {
 	private:
 		int yMax, xMax;
 		std::vector<CoordinateCell> coordinateCells;
+		Cursor playerCursor;
 };
 
 
