@@ -41,10 +41,10 @@ GameMap::GameMap(int x, int y) {
         }
         coordinateCells.push_back(cell);
 
-        if (xCoord < xMax) {
+        if (xCoord < xMax - 1) {
             xCoord++;
         }
-        else if (yCoord < yMax) {
+        else if (yCoord < yMax - 1) {
             xCoord = 0;
             yCoord++;
         }

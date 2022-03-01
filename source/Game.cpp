@@ -99,14 +99,9 @@ void Game::runCombat(Enemy& targetEnemy) {
 }
 
 void Game::runActionSequence() {
-	// Build map
-	// Establish chracter attributes
-		// Position
-		// Available actions
-	// Establish environment
-		// Terrain
-		// Interactive objects
-	// Load actions
+	if (gameMap.get() == NULL) {
+		generateGameMap(12, 12);
+	}
 }
 
 void Game::combatEnemyAttackCharacter(hero* mc, Enemy* enemy, int diceSize) {
@@ -124,6 +119,12 @@ int Game::rollDice(int diceSize) {
 	int roll;
 	roll = rand() % diceSize + 1;
 	return roll;
+}
+
+void Game::generateGameMap(int xMax, int yMax) {
+	// TODO - generate the approprate game info
+	// Create a new function in GameMap class to take in new data
+	gameMap.reset(new GameMap(xMax, yMax));
 }
 
 void Game::gameOver() {

@@ -19,12 +19,13 @@ public:
 	void runActionSequence();
 	void combatEnemyAttackCharacter(hero* mc, Enemy* enemy, int diceSize);
 	int rollDice(int diceSize);
+	void generateGameMap(int xMax, int yMax);
 	void gameOver();
 
 private:
 	bool quit;
 	std::shared_ptr<hero> character;
 	std::vector<Enemy> enemies;
-	GameMap gameMap;
+	std::shared_ptr<GameMap> gameMap;
 };
 
