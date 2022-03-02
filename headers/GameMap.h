@@ -1,5 +1,7 @@
 #pragma once
+#include <string>
 #include <vector>
+#include <fstream>
 
 enum Terrain_Type {sand, stone, grass, swamp, marsh, forrest, jungle, mountain};
 
@@ -15,6 +17,7 @@ struct Cursor {
 class GameMap {
 	public:
 		GameMap(int x=10, int y=10);
+		GameMap(std::string);
 		~GameMap();
 		int getArea();
 

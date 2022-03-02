@@ -53,6 +53,12 @@ GameMap::GameMap(int x, int y) {
     playerCursor.y = yMax / 2;
 }
 
+GameMap::GameMap(std::string) {
+    xMax = 10;
+    yMax = 10;
+    // Stub constructor. Need to implement a file I/O build
+}
+
 GameMap::~GameMap() {
     
 }
