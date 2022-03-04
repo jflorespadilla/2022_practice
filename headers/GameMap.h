@@ -17,7 +17,7 @@ struct Cursor {
 class GameMap {
 	public:
 		GameMap(int x=10, int y=10);
-		GameMap(std::string);
+		GameMap(std::string fileName);
 		~GameMap();
 		int getArea();
 

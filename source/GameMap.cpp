@@ -53,10 +53,77 @@ GameMap::GameMap(int x, int y) {
     playerCursor.y = yMax / 2;
 }
 
-GameMap::GameMap(std::string) {
-    xMax = 10;
-    yMax = 10;
-    // Stub constructor. Need to implement a file I/O build
+GameMap::GameMap(std::string fileName) {
+    std::ifstream mapFile;
+    CoordinateCell cell;
+    int terrainSelector;
+
+    mapFile.open(fileName);
+    if (mapFile.is_open()) {
+        mapFile >> yMax;
+        mapFile >> xMax;
+        coordinateCells.resize(yMax * xMax);
+        while (mapFile.good()) {
+            mapFile >> cell.y;
+            mapFile >> cell.x;
+            mapFile >> terrainSelector;
+
+            switch (terrainSelector) {
+            case 0:
+                cell.terrain = sand;
+                break;
+            case 1:
+                cell.terrain = stone;
+                break;
+            case 2:
+                cell.terrain = grass;
+                break;
+            case 3:
+                cell.terrain = swamp;
+                break;
+            case 4:
+                cell.terrain = marsh;
+                break;
+            case 5:
+                cell.terrain = forrest;
+                break;
+            case 6:
+                cell.terrain = jungle;
+                break;
+            case 7:
+                cell.terrain = mountain;
+                break;
+            }
+            coordinateCells.push_back(cell);
+        }
+    }
+    else {
+        yMax = 4;
+        xMax = 4;
+
+        int xCoord = 0;
+        int yCoord = 0;
+        CoordinateCell cell;
+        coordinateCells.resize(yMax * xMax);
+
+        for (int i = 0; i < yMax * xMax; i++) {
+            cell.y = yCoord;
+            cell.x = xCoord;
+            cell.terrain = mountain;
+
+            coordinateCells.push_back(cell);
+
+            if (xCoord < xMax - 1) {
+                xCoord++;
+            }
+            else if (yCoord < yMax - 1) {
+                xCoord = 0;
+                yCoord++;
+            }
+        }
+    }
+    playerCursor.x = xMax / 2;
+    playerCursor.y = yMax / 2;
 }
 
 GameMap::~GameMap() {
