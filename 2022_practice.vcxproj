@@ -152,6 +152,9 @@
     <ClInclude Include="headers\GameMap.h" />
     <ClInclude Include="headers\hero.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="maps\testmap.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

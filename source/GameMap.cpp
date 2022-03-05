@@ -41,10 +41,10 @@ GameMap::GameMap(int x, int y) {
         }
         coordinateCells.push_back(cell);
 
-        if (xCoord < xMax - 1) {
+        if (xCoord < xMax) {
             xCoord++;
         }
-        else if (yCoord < yMax - 1) {
+        else if (yCoord < yMax) {
             xCoord = 0;
             yCoord++;
         }
@@ -60,12 +60,12 @@ GameMap::GameMap(std::string fileName) {
 
     mapFile.open(fileName);
     if (mapFile.is_open()) {
-        mapFile >> yMax;
         mapFile >> xMax;
+        mapFile >> yMax;
         coordinateCells.resize(yMax * xMax);
         while (mapFile.good()) {
-            mapFile >> cell.y;
             mapFile >> cell.x;
+            mapFile >> cell.y;
             mapFile >> terrainSelector;
 
             switch (terrainSelector) {
@@ -96,10 +96,11 @@ GameMap::GameMap(std::string fileName) {
             }
             coordinateCells.push_back(cell);
         }
+        mapFile.close();
     }
     else {
-        yMax = 4;
         xMax = 4;
+        yMax = 4;
 
         int xCoord = 0;
         int yCoord = 0;
@@ -113,10 +114,10 @@ GameMap::GameMap(std::string fileName) {
 
             coordinateCells.push_back(cell);
 
-            if (xCoord < xMax - 1) {
+            if (xCoord < xMax) {
                 xCoord++;
             }
-            else if (yCoord < yMax - 1) {
+            else if (yCoord < yMax) {
                 xCoord = 0;
                 yCoord++;
             }
