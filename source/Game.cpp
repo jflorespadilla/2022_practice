@@ -122,8 +122,7 @@ int Game::rollDice(int diceSize) {
 }
 
 void Game::generateGameMap(int xMax, int yMax) {
-	// TODO - generate the approprate game info
-	// Create a new function in GameMap class to take in new data
+	// TODO - Adjust map functions in this class
 	gameMap.reset(new GameMap(xMax, yMax));
 }
 
