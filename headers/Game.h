@@ -19,7 +19,7 @@ public:
 	void runActionSequence();
 	void combatEnemyAttackCharacter(hero* mc, Enemy* enemy, int diceSize);
 	int rollDice(int diceSize);
-	void generateGameMap(int xMax, int yMax);
+	void generateGameMap(std::string mapFile);
 	void gameOver();
 
 private:

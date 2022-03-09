@@ -17,23 +17,12 @@ void Game::run() {
 	srand(time(NULL));
 	while (!quit) {
 		std::cout << "Your character is " << character->getName() << std::endl <<std::endl; 
-
-		// TODO -  Think about sequence scenarios
-			// Action sequences
-			// Combat sequence
-			// Noncombat sequence
-
-
-		Enemy enemy("Lizard", "Slash", 12, 4);
-		std::cout << "Your enemy is " << enemy.getName() << std::endl << std::endl;
-
-		std::cout << "Enter Combat?\nY) Yes\nN) No" << std::endl;
+		runActionSequence();
+		std::cout << "Quit? (Y/N): ";
 		std::cin >> input;
-
 		if (input == 'y' || input == 'Y') {
-			runCombat(enemy);
+			quit = true;
 		}
-		gameOver();
 	}
 }
 
@@ -100,8 +89,10 @@ void Game::runCombat(Enemy& targetEnemy) {
 
 void Game::runActionSequence() {
 	if (gameMap.get() == NULL) {
-		generateGameMap(12, 12);
+		std::string mapFile = "maps/testmap.txt";
+		generateGameMap(mapFile);
 	}
+	std::cout << "Map Area is: " << gameMap->getArea() << "\n";
 }
 
 void Game::combatEnemyAttackCharacter(hero* mc, Enemy* enemy, int diceSize) {
@@ -121,9 +112,8 @@ int Game::rollDice(int diceSize) {
 	return roll;
 }
 
-void Game::generateGameMap(int xMax, int yMax) {
-	// TODO - Adjust map functions in this class
-	gameMap.reset(new GameMap(xMax, yMax));
+void Game::generateGameMap(std::string mapFile) {
+	gameMap.reset(new GameMap(mapFile));
 }
 
 void Game::gameOver() {
