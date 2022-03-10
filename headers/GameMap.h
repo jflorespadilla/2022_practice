@@ -19,6 +19,7 @@ class GameMap {
 		GameMap(int x=10, int y=10);
 		GameMap(std::string fileName);
 		~GameMap();
+		void getPlayerCoordinates(Cursor& cursor);
 		int getArea();
 
 	private:

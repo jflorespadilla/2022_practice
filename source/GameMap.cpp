@@ -131,6 +131,11 @@ GameMap::~GameMap() {
     
 }
 
+void GameMap::getPlayerCoordinates(Cursor& cursor) {
+    cursor.x = playerCursor.x;
+    cursor.y = playerCursor.y;
+}
+
 int GameMap::getArea() {
     return yMax * xMax;
 }

@@ -92,7 +92,9 @@ void Game::runActionSequence() {
 		std::string mapFile = "maps/testmap.txt";
 		generateGameMap(mapFile);
 	}
-	std::cout << "Map Area is: " << gameMap->getArea() << "\n";
+	Cursor playerCursor;
+	gameMap->getPlayerCoordinates(playerCursor);
+	std::cout << "Character is at coordinate: (" << playerCursor.x << ", " << playerCursor.y << ")\n";
 }
 
 void Game::combatEnemyAttackCharacter(hero* mc, Enemy* enemy, int diceSize) {
