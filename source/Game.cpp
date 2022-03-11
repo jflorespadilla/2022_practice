@@ -95,6 +95,31 @@ void Game::runActionSequence() {
 	Cursor playerCursor;
 	gameMap->getPlayerCoordinates(playerCursor);
 	std::cout << "Character is at coordinate: (" << playerCursor.x << ", " << playerCursor.y << ")\n";
+
+	std::cout << "Navigate? (WASD)" << std::endl << std::endl;
+	char input;
+	std::cin >> input;
+
+	switch (input) {
+	case 'w':
+	case 'W':
+		gameMap->updatePlayerCoordinates(0, 1);
+		break;
+	case 's':
+	case 'S':
+		gameMap->updatePlayerCoordinates(0, -1);
+		break;
+	case 'a':
+	case 'A':
+		gameMap->updatePlayerCoordinates(-1, 0);
+		break;
+	case 'd':
+	case 'D':
+		gameMap->updatePlayerCoordinates(1, 0);
+		break;
+	}
+	gameMap->getPlayerCoordinates(playerCursor);
+	std::cout << "Character is at coordinate: (" << playerCursor.x << ", " << playerCursor.y << ")\n";
 }
 
 void Game::combatEnemyAttackCharacter(hero* mc, Enemy* enemy, int diceSize) {

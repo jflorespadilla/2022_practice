@@ -20,6 +20,7 @@ class GameMap {
 		GameMap(std::string fileName);
 		~GameMap();
 		void getPlayerCoordinates(Cursor& cursor);
+		void updatePlayerCoordinates(int x, int y);
 		int getArea();
 
 	private:
