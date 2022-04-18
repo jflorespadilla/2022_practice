@@ -25,7 +25,7 @@ public:
 private:
 	bool quit;
 	std::shared_ptr<hero> character;
-	std::vector<Enemy> enemies;
+	std::vector<Enemy*> enemies;
 	std::shared_ptr<GameMap> gameMap;
 };
 

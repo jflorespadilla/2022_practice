@@ -22,6 +22,7 @@ class GameMap {
 		void getPlayerCoordinates(Cursor& cursor);
 		void updatePlayerCoordinates(int x, int y);
 		int getArea();
+		bool hasEnemies();
 
 	private:
 		int yMax, xMax;
