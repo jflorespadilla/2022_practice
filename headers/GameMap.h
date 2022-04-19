@@ -27,6 +27,7 @@ class GameMap {
 	private:
 		int yMax, xMax;
 		std::vector<CoordinateCell> coordinateCells;
+		std::pair<int, int> enemyCoordinates; // Using integer pair to determain placement of enemies.
 		Cursor playerCursor;
 };
 
