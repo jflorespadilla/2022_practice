@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <cstdlib>
+#include <ctime>
 
 enum Terrain_Type {sand, stone, grass, swamp, marsh, forrest, jungle, mountain};
 
@@ -26,10 +28,10 @@ class GameMap {
 
 	private:
 		int yMax, xMax;
-		std::vector<CoordinateCell> coordinateCells;
-		std::pair<int, int> enemyCoordinate;
-		std::vector<std::pair<int, int>> enemyCoordinates;// No code today
-		Cursor playerCursor;
+		std::vector<CoordinateCell> _coordinateCells;
+		std::pair<int, int> _enemyCoordinate;
+		std::vector<std::pair<int, int>> _enemyCoordinates;
+		Cursor _playerCursor;
 };
 
 

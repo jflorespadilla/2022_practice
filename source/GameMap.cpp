@@ -1,9 +1,10 @@
 #include "..\headers\GameMap.h"
 
 GameMap::GameMap(int x, int y) {
+    std::srand(std::time(nullptr));
     yMax = y;
     xMax = x;
-    coordinateCells.resize(yMax * xMax);
+    _coordinateCells.resize(yMax * xMax);
     
     // Generate Default Map
     int xCoord = 0;
@@ -39,7 +40,12 @@ GameMap::GameMap(int x, int y) {
             cell.terrain = mountain;
             break;
         }
-        coordinateCells.push_back(cell);
+        _coordinateCells.push_back(cell);
+
+        if (75 < (rand() % 100)) {
+            _enemyCoordinate = std::pair<int, int>(xCoord, yCoord);
+            _enemyCoordinates.push_back(_enemyCoordinate);
+        }
 
         if (xCoord < xMax) {
             xCoord++;
@@ -49,20 +55,21 @@ GameMap::GameMap(int x, int y) {
             yCoord++;
         }
     }
-    playerCursor.x = xMax / 2;
-    playerCursor.y = yMax / 2;
+    _playerCursor.x = xMax / 2;
+    _playerCursor.y = yMax / 2;
 }
 
 GameMap::GameMap(std::string fileName) {
     std::ifstream mapFile;
     CoordinateCell cell;
     int terrainSelector;
+    std::srand(std::time(nullptr));
 
     mapFile.open(fileName);
     if (mapFile.is_open()) {
         mapFile >> xMax;
         mapFile >> yMax;
-        coordinateCells.resize(yMax * xMax);
+        _coordinateCells.resize(yMax * xMax);
         while (mapFile.good()) {
             mapFile >> cell.x;
             mapFile >> cell.y;
@@ -94,7 +101,11 @@ GameMap::GameMap(std::string fileName) {
                 cell.terrain = mountain;
                 break;
             }
-            coordinateCells.push_back(cell);
+            _coordinateCells.push_back(cell);
+            if (75 < (rand() % 100)) {
+                _enemyCoordinate = std::pair<int, int>(cell.x, cell.y);
+                _enemyCoordinates.push_back(_enemyCoordinate);
+            }
         }
         mapFile.close();
     }
@@ -105,14 +116,18 @@ GameMap::GameMap(std::string fileName) {
         int xCoord = 0;
         int yCoord = 0;
         CoordinateCell cell;
-        coordinateCells.resize(yMax * xMax);
+        _coordinateCells.resize(yMax * xMax);
 
         for (int i = 0; i < yMax * xMax; i++) {
             cell.y = yCoord;
             cell.x = xCoord;
             cell.terrain = mountain;
 
-            coordinateCells.push_back(cell);
+            _coordinateCells.push_back(cell);
+            if (75 < (rand() % 100)) {
+                _enemyCoordinate = std::pair<int, int>(xCoord, yCoord);
+                _enemyCoordinates.push_back(_enemyCoordinate);
+            }
 
             if (xCoord < xMax) {
                 xCoord++;
@@ -123,8 +138,8 @@ GameMap::GameMap(std::string fileName) {
             }
         }
     }
-    playerCursor.x = xMax / 2;
-    playerCursor.y = yMax / 2;
+    _playerCursor.x = xMax / 2;
+    _playerCursor.y = yMax / 2;
 }
 
 GameMap::~GameMap() {
@@ -132,31 +147,43 @@ GameMap::~GameMap() {
 }
 
 void GameMap::getPlayerCoordinates(Cursor& cursor) {
-    cursor.x = playerCursor.x;
-    cursor.y = playerCursor.y;
+    cursor.x = _playerCursor.x;
+    cursor.y = _playerCursor.y;
 }
 
 void GameMap::updatePlayerCoordinates(int x, int y) {
-    playerCursor.x += x;
-    playerCursor.y += y;
+    _playerCursor.x += x;
+    _playerCursor.y += y;
 
-    if (playerCursor.x >= xMax) {
-        playerCursor.x = xMax - 1;
+    if (_playerCursor.x >= xMax) {
+        _playerCursor.x = xMax - 1;
     }
 
-    if (playerCursor.y >= yMax) {
-        playerCursor.y = yMax - 1;
+    if (_playerCursor.y >= yMax) {
+        _playerCursor.y = yMax - 1;
     }
 
-    if (playerCursor.x < 0) {
-        playerCursor.x = 0;
+    if (_playerCursor.x < 0) {
+        _playerCursor.x = 0;
     }
 
-    if (playerCursor.y < 0) {
-        playerCursor.y = 0;
+    if (_playerCursor.y < 0) {
+        _playerCursor.y = 0;
     }
 }
 
 int GameMap::getArea() {
     return yMax * xMax;
+}
+
+bool GameMap::hasEnemies() {
+    std::vector<std::pair<int, int>>::iterator itr;
+
+    for (itr = _enemyCoordinates.begin(); itr < _enemyCoordinates.end(); itr++) {
+        if (itr->first == _playerCursor.x && itr->second == _playerCursor.y) {
+            return true;
+        }
+    }
+
+    return false;
 }
