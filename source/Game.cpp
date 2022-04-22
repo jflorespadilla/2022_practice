@@ -120,6 +120,9 @@ void Game::runActionSequence() {
 	}
 	gameMap->getPlayerCoordinates(playerCursor);
 	std::cout << "Character is at coordinate: (" << playerCursor.x << ", " << playerCursor.y << ")\n";
+	if (gameMap->hasEnemies()) {
+		std::cout << "Enemy Located! \n";
+	}
 }
 
 void Game::combatEnemyAttackCharacter(hero* mc, Enemy* enemy, int diceSize) {
