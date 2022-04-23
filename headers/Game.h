@@ -21,11 +21,12 @@ public:
 	int rollDice(int diceSize);
 	void generateGameMap(std::string mapFile);
 	void gameOver();
+	void generateEnemies();
 
 private:
-	bool quit;
-	std::shared_ptr<hero> character;
-	std::vector<Enemy*> enemies;
-	std::shared_ptr<GameMap> gameMap;
+	bool _quit;
+	std::shared_ptr<hero> _character;
+	std::vector<Enemy*> _enemies;
+	std::shared_ptr<GameMap> _gameMap;
 };
 

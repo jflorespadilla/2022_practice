@@ -1,7 +1,7 @@
 #include "..\headers\Game.h"
 
 Game::Game() {
-	quit = false;
+	_quit = false;
 }
 
 Game::~Game() {
@@ -9,19 +9,19 @@ Game::~Game() {
 }
 
 void Game::run() {
-	if (character.get() == NULL) {
+	if (_character.get() == NULL) {
 		createCharacter();
 	}
 
 	char input;
 	srand(time(NULL));
-	while (!quit) {
-		std::cout << "Your character is " << character->getName() << std::endl <<std::endl; 
+	while (!_quit) {
+		std::cout << "Your character is " << _character->getName() << std::endl <<std::endl; 
 		runActionSequence();
 		std::cout << "Quit? (Y/N): ";
 		std::cin >> input;
 		if (input == 'y' || input == 'Y') {
-			quit = true;
+			_quit = true;
 		}
 	}
 }
@@ -42,30 +42,37 @@ void Game::createCharacter() {
 	std::cin >> attackDamage;
 
 	std::cout << "Creating Hero Character..." << std::endl << std::endl;
-	character.reset(new hero(name, ability, health, defense, attackDamage));
+	_character.reset(new hero(name, ability, health, defense, attackDamage));
 }
 
-void Game::runCombat(Enemy& targetEnemy) {
+void Game::runCombat() {
+	generateEnemies();
 	char input;
 	int roll, diceSize=20;
 
 	std::cout << "-----COMBAT ENTERED!!!-----" << std::endl << std::endl;
 
-	while (character->checkIfAlive() && targetEnemy.checkIfAlive()) {
+	///
+	/// I am goint to seriously need to rework this logic.
+	/// They way I want this to work now has me needing to create 
+	/// new functions. Perhaps even new classes.
+	/// 
+	
+	while (_character->checkIfAlive() && targetEnemy.checkIfAlive()) {
 		roll = rollDice(diceSize);
 
-		std::cout << "Your Health: " << character->getHealth() << "\nEnemy Health: " << targetEnemy.getHealth() << std::endl << std::endl;
+		std::cout << "Your Health: " << _character->getHealth() << "\nEnemy Health: " << targetEnemy.getHealth() << std::endl << std::endl;
 		std::cout << "Attack? (Y/N): ";
 		std::cin >> input;
 		switch (input) {
 		case 'y':
 		case 'Y':
-			character->attackCharacter(targetEnemy, roll);
+			_character->attackCharacter(targetEnemy, roll);
 			break;
 		}
 
 		if (targetEnemy.checkIfAlive()) {
-			combatEnemyAttackCharacter(character.get(), &targetEnemy, diceSize);
+			combatEnemyAttackCharacter(_character.get(), &targetEnemy, diceSize);
 		}
 		else {
 			std::cout << "You've conqured your enemy!!" << std::endl << std::endl;
@@ -88,12 +95,12 @@ void Game::runCombat(Enemy& targetEnemy) {
 }
 
 void Game::runActionSequence() {
-	if (gameMap.get() == NULL) {
+	if (_gameMap.get() == NULL) {
 		std::string mapFile = "maps/testmap.txt";
 		generateGameMap(mapFile);
 	}
 	Cursor playerCursor;
-	gameMap->getPlayerCoordinates(playerCursor);
+	_gameMap->getPlayerCoordinates(playerCursor);
 	std::cout << "Character is at coordinate: (" << playerCursor.x << ", " << playerCursor.y << ")\n";
 
 	std::cout << "Navigate? (WASD)" << std::endl << std::endl;
@@ -103,24 +110,24 @@ void Game::runActionSequence() {
 	switch (input) {
 	case 'w':
 	case 'W':
-		gameMap->updatePlayerCoordinates(0, 1);
+		_gameMap->updatePlayerCoordinates(0, 1);
 		break;
 	case 's':
 	case 'S':
-		gameMap->updatePlayerCoordinates(0, -1);
+		_gameMap->updatePlayerCoordinates(0, -1);
 		break;
 	case 'a':
 	case 'A':
-		gameMap->updatePlayerCoordinates(-1, 0);
+		_gameMap->updatePlayerCoordinates(-1, 0);
 		break;
 	case 'd':
 	case 'D':
-		gameMap->updatePlayerCoordinates(1, 0);
+		_gameMap->updatePlayerCoordinates(1, 0);
 		break;
 	}
-	gameMap->getPlayerCoordinates(playerCursor);
+	_gameMap->getPlayerCoordinates(playerCursor);
 	std::cout << "Character is at coordinate: (" << playerCursor.x << ", " << playerCursor.y << ")\n";
-	if (gameMap->hasEnemies()) {
+	if (_gameMap->hasEnemies()) {
 		std::cout << "Enemy Located! \n";
 	}
 }
@@ -143,7 +150,7 @@ int Game::rollDice(int diceSize) {
 }
 
 void Game::generateGameMap(std::string mapFile) {
-	gameMap.reset(new GameMap(mapFile));
+	_gameMap.reset(new GameMap(mapFile));
 }
 
 void Game::gameOver() {
@@ -151,8 +158,12 @@ void Game::gameOver() {
 	std::cout << "Game Over.\nTry Again?\n(Y/N): ";
 	std::cin >> input;
 	if (input == 'n' || input == 'N') {
-		quit = true;
+		_quit = true;
 		return;
 	}
-	character->revive();
+	_character->revive();
+}
+
+void Game::generateEnemies() {
+	
 }
