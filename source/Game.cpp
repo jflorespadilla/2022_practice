@@ -165,5 +165,9 @@ void Game::gameOver() {
 }
 
 void Game::generateEnemies() {
-	
+	_enemies.clear();
+
+	for (int i = 0; i < rand() % 3; i++) {
+		_enemies.push_back(new Enemy())
+	}
 }
