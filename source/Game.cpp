@@ -48,38 +48,42 @@ void Game::createCharacter() {
 void Game::runCombat() {
 	generateEnemies();
 	char input;
-	int roll, diceSize=20;
+	int attackOption, roll, diceSize=20;
 
 	std::cout << "-----COMBAT ENTERED!!!-----" << std::endl << std::endl;
-
-	///
-	/// I am goint to seriously need to rework this logic.
-	/// They way I want this to work now has me needing to create 
-	/// new functions. Perhaps even new classes.
-	/// 
 	
-	while (_character->checkIfAlive() && targetEnemy.checkIfAlive()) {
+	while (_character->checkIfAlive() && !_enemies.empty()) {
 		roll = rollDice(diceSize);
 
-		std::cout << "Your Health: " << _character->getHealth() << "\nEnemy Health: " << targetEnemy.getHealth() << std::endl << std::endl;
+		std::cout << "Your Health: " << _character->getHealth();
+		std::cout << "\nEnemy Health: ";
+		for (int i = 0; i < _enemies.size(); i++) {
+			std::cout << "\n" << _enemies[i]->getHealth();
+		}
+
 		std::cout << "Attack? (Y/N): ";
 		std::cin >> input;
 		switch (input) {
 		case 'y':
 		case 'Y':
-			_character->attackCharacter(targetEnemy, roll);
+			std::cout << "\n Attack Option:\n";
+			for (int i = 0; i < _enemies.size(); i++) {
+				std::cout << i << ")\n";
+			}
+			std::cin >> attackOption;
+			_character->attackCharacter(*_enemies[attackOption], roll);
 			break;
 		}
 
-		if (targetEnemy.checkIfAlive()) {
-			combatEnemyAttackCharacter(_character.get(), &targetEnemy, diceSize);
+		if (_enemies[attackOption]->checkIfAlive()) {
+			combatEnemyAttackCharacter(_character.get(), _enemies[attackOption], diceSize);
 		}
 		else {
 			std::cout << "You've conqured your enemy!!" << std::endl << std::endl;
 			return;
 		}
 
-		if (character->checkIfAlive()) {
+		if (_character->checkIfAlive()) {
 			std::cout << "Continue combat? (Y/N) ";
 			std::cin >> input;
 			if (input == 'N' || input == 'n') {
@@ -168,6 +172,6 @@ void Game::generateEnemies() {
 	_enemies.clear();
 
 	for (int i = 0; i < rand() % 3; i++) {
-		_enemies.push_back(new Enemy())
+		_enemies.push_back(new Enemy());
 	}
 }
