@@ -52,7 +52,7 @@ void Game::runCombat() {
 
 	std::cout << "-----COMBAT ENTERED!!!-----" << std::endl << std::endl;
 	
-	while (_character->checkIfAlive() && !_enemies.empty()) {
+	while (_character->checkIfAlive() && !allEnemiesVanquished()) {
 		roll = rollDice(diceSize);
 
 		std::cout << "Your Health: " << _character->getHealth();
@@ -75,14 +75,9 @@ void Game::runCombat() {
 			break;
 		}
 
-		if (_enemies[attackOption]->checkIfAlive()) {
-			combatEnemyAttackCharacter(_character.get(), _enemies[attackOption], diceSize);
-		}
-		else {
-			std::cout << "You've conqured your enemy!!" << std::endl << std::endl;
-			return;
-		}
+		// replace logic here for enemy attacking character 
 
+		// think about moving death logic to it's own function
 		if (_character->checkIfAlive()) {
 			std::cout << "Continue combat? (Y/N) ";
 			std::cin >> input;
@@ -174,4 +169,17 @@ void Game::generateEnemies() {
 	for (int i = 0; i < rand() % 3; i++) {
 		_enemies.push_back(new Enemy());
 	}
+}
+
+bool Game::allEnemiesVanquished() {
+	bool retVal = true;
+
+	if (_enemies.empty()) {
+		return true;
+	}
+
+	for (int i = 0; i < _enemies.size(); i++) {
+		retVal = (retVal && !_enemies[i]->checkIfAlive());
+	}
+	return retVal;
 }

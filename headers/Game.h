@@ -22,6 +22,7 @@ public:
 	void generateGameMap(std::string mapFile);
 	void gameOver();
 	void generateEnemies();
+	bool allEnemiesVanquished();
 
 private:
 	bool _quit;
