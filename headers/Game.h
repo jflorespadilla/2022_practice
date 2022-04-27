@@ -15,9 +15,12 @@ public:
 	~Game();
 	void run();
 	void createCharacter();
+	void displayCharacterHealth();
+	void displayEnemyHealth();
 	void runCombat();
 	void runActionSequence();
-	void combatEnemyAttackCharacter(hero* mc, Enemy* enemy, int diceSize);
+	void combatEnemyAttackCharacter(Enemy* enemy, int diceSize);
+	void combatEnemiesAttack(int diceSize);
 	int rollDice(int diceSize);
 	void generateGameMap(std::string mapFile);
 	void gameOver();

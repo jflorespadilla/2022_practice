@@ -45,6 +45,20 @@ void Game::createCharacter() {
 	_character.reset(new hero(name, ability, health, defense, attackDamage));
 }
 
+void Game::displayCharacterHealth() {
+	std::cout << "Your Health: " << _character->getHealth() << "\n";
+}
+
+void Game::displayEnemyHealth() {
+	std::cout << "Enemy Health: ";
+	for (int i = 0; i < _enemies.size(); i++) {
+		if (_enemies[i]->checkIfAlive()) {
+			std::cout <<  _enemies[i]->getHealth() << "\n";
+		}
+		std::cout << "Enemy is vanquished\n";
+	}
+}
+
 void Game::runCombat() {
 	generateEnemies();
 	char input;
@@ -55,11 +69,8 @@ void Game::runCombat() {
 	while (_character->checkIfAlive() && !allEnemiesVanquished()) {
 		roll = rollDice(diceSize);
 
-		std::cout << "Your Health: " << _character->getHealth();
-		std::cout << "\nEnemy Health: ";
-		for (int i = 0; i < _enemies.size(); i++) {
-			std::cout << "\n" << _enemies[i]->getHealth();
-		}
+		displayCharacterHealth();
+		displayEnemyHealth();
 
 		std::cout << "Attack? (Y/N): ";
 		std::cin >> input;
@@ -75,7 +86,7 @@ void Game::runCombat() {
 			break;
 		}
 
-		// replace logic here for enemy attacking character 
+		combatEnemiesAttack(diceSize);
 
 		// think about moving death logic to it's own function
 		if (_character->checkIfAlive()) {
@@ -131,14 +142,26 @@ void Game::runActionSequence() {
 	}
 }
 
-void Game::combatEnemyAttackCharacter(hero* mc, Enemy* enemy, int diceSize) {
+void Game::combatEnemyAttackCharacter(Enemy* enemy, int diceSize) {
 	int roll;
 	if (rollDice(100) > 60) {
 		roll = rollDice(diceSize);
-		enemy->attackCharacter(mc, roll);
+		enemy->attackCharacter(_character.get(), roll);
 	}
 	else {
 		std::cout << "Enemy hesitates and hisses at you" << std::endl << std::endl;
+	}
+}
+
+void Game::combatEnemiesAttack(int diceSize) {
+	if (_enemies.empty()) {
+		return;
+	}
+
+	for (int i = 0; i < _enemies.size(); i++) {
+		if (_enemies[i]->checkIfAlive()) {
+			combatEnemyAttackCharacter(_enemies[i], diceSize);
+		}
 	}
 }
 
