@@ -11,12 +11,12 @@ Game::~Game() {
 void Game::run() {
 	if (_character.get() == NULL) {
 		createCharacter();
+		std::cout << "Your character is " << _character->getName() << std::endl << std::endl;
 	}
 
 	char input;
 	srand(time(NULL));
 	while (!_quit) {
-		std::cout << "Your character is " << _character->getName() << std::endl <<std::endl; 
 		runActionSequence();
 		std::cout << "Quit? (Y/N): ";
 		std::cin >> input;
@@ -139,6 +139,7 @@ void Game::runActionSequence() {
 	std::cout << "Character is at coordinate: (" << playerCursor.x << ", " << playerCursor.y << ")\n";
 	if (_gameMap->hasEnemies()) {
 		std::cout << "Enemy Located! \n";
+		// I can't decide if I want to trigger combat here or in the run() function
 	}
 }
 
