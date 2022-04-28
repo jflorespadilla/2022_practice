@@ -139,7 +139,7 @@ void Game::runActionSequence() {
 	std::cout << "Character is at coordinate: (" << playerCursor.x << ", " << playerCursor.y << ")\n";
 	if (_gameMap->hasEnemies()) {
 		std::cout << "Enemy Located! \n";
-		// I can't decide if I want to trigger combat here or in the run() function
+		// Need to code later. Still deciding on further code architecture.
 	}
 }
 
