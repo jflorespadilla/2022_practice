@@ -18,11 +18,7 @@ void Game::run() {
 	srand(time(NULL));
 	while (!_quit) {
 		runActionSequence();
-		std::cout << "Quit? (Y/N): ";
-		std::cin >> input;
-		if (input == 'y' || input == 'Y') {
-			_quit = true;
-		}
+		gameOver();
 	}
 }
 
@@ -88,7 +84,6 @@ void Game::runCombat() {
 
 		combatEnemiesAttack(diceSize);
 
-		// think about moving death logic to it's own function
 		if (_character->checkIfAlive()) {
 			std::cout << "Continue combat? (Y/N) ";
 			std::cin >> input;
@@ -98,10 +93,11 @@ void Game::runCombat() {
 			}
 		}
 		else {
-			std::cout << "Your enemy has vanqueshed you!!" << std::endl << std::endl;
+			std::cout << "Your enemies hav vanqueshed you!!" << std::endl << std::endl;
 			return;
 		}
 	}
+	std::cout << "You have slain your foes!" << std::endl << std::endl;
 }
 
 void Game::runActionSequence() {
@@ -139,7 +135,7 @@ void Game::runActionSequence() {
 	std::cout << "Character is at coordinate: (" << playerCursor.x << ", " << playerCursor.y << ")\n";
 	if (_gameMap->hasEnemies()) {
 		std::cout << "Enemy Located! \n";
-		// Need to code later. Still deciding on further code architecture.
+		runCombat();
 	}
 }
 
@@ -178,13 +174,23 @@ void Game::generateGameMap(std::string mapFile) {
 
 void Game::gameOver() {
 	char input;
-	std::cout << "Game Over.\nTry Again?\n(Y/N): ";
-	std::cin >> input;
-	if (input == 'n' || input == 'N') {
-		_quit = true;
-		return;
+
+	if (!_character->checkIfAlive()) {
+		std::cout << "Game Over.\nTry Again?\n(Y/N): ";
+		std::cin >> input;
+		if (input == 'n' || input == 'N') {
+			_quit = true;
+			return;
+		}
+		_character->revive();
 	}
-	_character->revive();
+	else {
+		std::cout << "Quit? (Y/N): ";
+		std::cin >> input;
+		if (input == 'y' || input == 'Y') {
+			_quit = true;
+		}
+	}
 }
 
 void Game::generateEnemies() {
