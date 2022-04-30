@@ -50,6 +50,7 @@ void Game::displayEnemyHealth() {
 	for (int i = 0; i < _enemies.size(); i++) {
 		if (_enemies[i]->checkIfAlive()) {
 			std::cout <<  _enemies[i]->getHealth() << "\n";
+			return;
 		}
 		std::cout << "Enemy is vanquished\n";
 	}
@@ -75,10 +76,10 @@ void Game::runCombat() {
 		case 'Y':
 			std::cout << "\n Attack Option:\n";
 			for (int i = 0; i < _enemies.size(); i++) {
-				std::cout << i << ")\n";
+				std::cout << i + 1<< ")\n";
 			}
 			std::cin >> attackOption;
-			_character->attackCharacter(*_enemies[attackOption], roll);
+			_character->attackCharacter(*_enemies[attackOption - 1], roll);
 			break;
 		}
 
@@ -93,7 +94,7 @@ void Game::runCombat() {
 			}
 		}
 		else {
-			std::cout << "Your enemies hav vanqueshed you!!" << std::endl << std::endl;
+			std::cout << "Your enemies have vanqueshed you!!" << std::endl << std::endl;
 			return;
 		}
 	}
@@ -106,36 +107,39 @@ void Game::runActionSequence() {
 		generateGameMap(mapFile);
 	}
 	Cursor playerCursor;
-	_gameMap->getPlayerCoordinates(playerCursor);
-	std::cout << "Character is at coordinate: (" << playerCursor.x << ", " << playerCursor.y << ")\n";
 
-	std::cout << "Navigate? (WASD)" << std::endl << std::endl;
-	char input;
-	std::cin >> input;
+	while (!_quit) {
+		_gameMap->getPlayerCoordinates(playerCursor);
+		std::cout << "Character is at coordinate: (" << playerCursor.x << ", " << playerCursor.y << ")\n";
 
-	switch (input) {
-	case 'w':
-	case 'W':
-		_gameMap->updatePlayerCoordinates(0, 1);
-		break;
-	case 's':
-	case 'S':
-		_gameMap->updatePlayerCoordinates(0, -1);
-		break;
-	case 'a':
-	case 'A':
-		_gameMap->updatePlayerCoordinates(-1, 0);
-		break;
-	case 'd':
-	case 'D':
-		_gameMap->updatePlayerCoordinates(1, 0);
-		break;
-	}
-	_gameMap->getPlayerCoordinates(playerCursor);
-	std::cout << "Character is at coordinate: (" << playerCursor.x << ", " << playerCursor.y << ")\n";
-	if (_gameMap->hasEnemies()) {
-		std::cout << "Enemy Located! \n";
-		runCombat();
+		std::cout << "Navigate? (WASD)" << std::endl << std::endl;
+		char input;
+		std::cin >> input;
+
+		switch (input) {
+		case 'w':
+		case 'W':
+			_gameMap->updatePlayerCoordinates(0, 1);
+			break;
+		case 's':
+		case 'S':
+			_gameMap->updatePlayerCoordinates(0, -1);
+			break;
+		case 'a':
+		case 'A':
+			_gameMap->updatePlayerCoordinates(-1, 0);
+			break;
+		case 'd':
+		case 'D':
+			_gameMap->updatePlayerCoordinates(1, 0);
+			break;
+		}
+		_gameMap->getPlayerCoordinates(playerCursor);
+
+		if (_gameMap->hasEnemies()) {
+			std::cout << "Enemy Located! \n";
+			runCombat();
+		}
 	}
 }
 
@@ -196,7 +200,7 @@ void Game::gameOver() {
 void Game::generateEnemies() {
 	_enemies.clear();
 
-	for (int i = 0; i < rand() % 3; i++) {
+	for (int i = 0; i < rand() % 57; i++) {
 		_enemies.push_back(new Enemy());
 	}
 }
