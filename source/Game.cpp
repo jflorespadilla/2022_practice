@@ -78,6 +78,7 @@ void Game::runCombat() {
 			for (int i = 0; i < _enemies.size(); i++) {
 				std::cout << i + 1<< ")\n";
 			}
+			// I'll need to double check my logic here. Something might not be right.
 			std::cin >> attackOption;
 			_character->attackCharacter(*_enemies[attackOption - 1], roll);
 			break;
