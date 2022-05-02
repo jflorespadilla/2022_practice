@@ -50,9 +50,10 @@ void Game::displayEnemyHealth() {
 	for (int i = 0; i < _enemies.size(); i++) {
 		if (_enemies[i]->checkIfAlive()) {
 			std::cout <<  _enemies[i]->getHealth() << "\n";
-			return;
 		}
-		std::cout << "Enemy is vanquished\n";
+		else {
+			std::cout << "Enemy is vanquished\n";
+		}
 	}
 }
 
@@ -78,7 +79,6 @@ void Game::runCombat() {
 			for (int i = 0; i < _enemies.size(); i++) {
 				std::cout << i + 1<< ")\n";
 			}
-			// I'll need to double check my logic here. Something might not be right.
 			std::cin >> attackOption;
 			_character->attackCharacter(*_enemies[attackOption - 1], roll);
 			break;
@@ -109,7 +109,7 @@ void Game::runActionSequence() {
 	}
 	Cursor playerCursor;
 
-	while (!_quit) {
+	while (!_quit && _character->checkIfAlive() ) {
 		_gameMap->getPlayerCoordinates(playerCursor);
 		std::cout << "Character is at coordinate: (" << playerCursor.x << ", " << playerCursor.y << ")\n";
 
