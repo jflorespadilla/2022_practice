@@ -59,7 +59,6 @@ void Game::displayEnemyHealth() {
 
 void Game::runCombat() {
 	generateEnemies();
-	char input;
 	int attackOption, roll, diceSize=20;
 
 	std::cout << "-----COMBAT ENTERED!!!-----" << std::endl << std::endl;
@@ -71,13 +70,12 @@ void Game::runCombat() {
 		displayEnemyHealth();
 
 		std::cout << "Attack? (Y/N): ";
-		std::cin >> input;
-		switch (input) {
+		switch (getInput()) {
 		case 'y':
 		case 'Y':
 			std::cout << "\n Attack Option:\n";
 			for (int i = 0; i < _enemies.size(); i++) {
-				std::cout << i + 1<< ")\n";
+				std::cout << i + 1<< ")" << _enemies[i]->getName() << " \n";
 			}
 			std::cin >> attackOption;
 			_character->attackCharacter(*_enemies[attackOption - 1], roll);
@@ -88,8 +86,7 @@ void Game::runCombat() {
 
 		if (_character->checkIfAlive()) {
 			std::cout << "Continue combat? (Y/N) ";
-			std::cin >> input;
-			if (input == 'N' || input == 'n') {
+			if (getInput() == 'N' || getInput() == 'n') {
 				std::cout << "You have fled combat!" << std::endl << std::endl;
 				return;
 			}
@@ -114,10 +111,8 @@ void Game::runActionSequence() {
 		std::cout << "Character is at coordinate: (" << playerCursor.x << ", " << playerCursor.y << ")\n";
 
 		std::cout << "Navigate? (WASD)" << std::endl << std::endl;
-		char input;
-		std::cin >> input;
 
-		switch (input) {
+		switch (getInput()) {
 		case 'w':
 		case 'W':
 			_gameMap->updatePlayerCoordinates(0, 1);
@@ -178,12 +173,9 @@ void Game::generateGameMap(std::string mapFile) {
 }
 
 void Game::gameOver() {
-	char input;
-
 	if (!_character->checkIfAlive()) {
 		std::cout << "Game Over.\nTry Again?\n(Y/N): ";
-		std::cin >> input;
-		if (input == 'n' || input == 'N') {
+		if (getInput() == 'n' || getInput() == 'N') {
 			_quit = true;
 			return;
 		}
@@ -191,8 +183,7 @@ void Game::gameOver() {
 	}
 	else {
 		std::cout << "Quit? (Y/N): ";
-		std::cin >> input;
-		if (input == 'y' || input == 'Y') {
+		if (getInput() == 'y' || getInput() == 'Y') {
 			_quit = true;
 		}
 	}
@@ -217,4 +208,23 @@ bool Game::allEnemiesVanquished() {
 		retVal = (retVal && !_enemies[i]->checkIfAlive());
 	}
 	return retVal;
+}
+
+char Game::getInput()
+{
+	char input;
+
+	std::cin >> input;
+	if (input == 27) {
+		promptQuit();
+	}
+	return input;
+}
+
+void Game::promptQuit() {
+	std::cout << "\n\nAre you sure you want to quit? (Y/N): ";
+	if (getInput() == 'n' || getInput() == 'N') {
+		_quit = true;
+		std::cout << "\n\nThank You for Playing! Bye!\n\n";
+	}
 }
