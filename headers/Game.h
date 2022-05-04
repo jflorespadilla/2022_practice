@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <conio.h>
 #include <vector>
 #include <memory>
 #include "Character.h"

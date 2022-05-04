@@ -212,9 +212,9 @@ bool Game::allEnemiesVanquished() {
 
 char Game::getInput()
 {
-	char input;
+	char input = _getch();
 
-	std::cin >> input;
+	//std::cin >> input;
 	if (input == 27) {
 		promptQuit();
 	}
@@ -223,7 +223,7 @@ char Game::getInput()
 
 void Game::promptQuit() {
 	std::cout << "\n\nAre you sure you want to quit? (Y/N): ";
-	if (getInput() == 'n' || getInput() == 'N') {
+	if (getInput() == 'y' || getInput() == 'Y') {
 		_quit = true;
 		std::cout << "\n\nThank You for Playing! Bye!\n\n";
 	}
