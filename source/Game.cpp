@@ -214,7 +214,6 @@ char Game::getInput()
 {
 	char input = _getch();
 
-	//std::cin >> input;
 	if (input == 27) {
 		promptQuit();
 	}
