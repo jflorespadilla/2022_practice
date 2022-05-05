@@ -80,6 +80,8 @@ void Game::runCombat() {
 			std::cin >> attackOption;
 			_character->attackCharacter(*_enemies[attackOption - 1], roll);
 			break;
+		case 27:
+			return;
 		}
 
 		combatEnemiesAttack(diceSize);
@@ -110,7 +112,7 @@ void Game::runActionSequence() {
 		_gameMap->getPlayerCoordinates(playerCursor);
 		std::cout << "Character is at coordinate: (" << playerCursor.x << ", " << playerCursor.y << ")\n";
 
-		std::cout << "Navigate? (WASD)" << std::endl << std::endl;
+		std::cout << "Navigate (WASD)" << std::endl << std::endl;
 
 		switch (getInput()) {
 		case 'w':
@@ -129,6 +131,8 @@ void Game::runActionSequence() {
 		case 'D':
 			_gameMap->updatePlayerCoordinates(1, 0);
 			break;
+		case 27:
+			return;
 		}
 		_gameMap->getPlayerCoordinates(playerCursor);
 
@@ -180,12 +184,6 @@ void Game::gameOver() {
 			return;
 		}
 		_character->revive();
-	}
-	else {
-		std::cout << "Quit? (Y/N): ";
-		if (getInput() == 'y' || getInput() == 'Y') {
-			_quit = true;
-		}
 	}
 }
 

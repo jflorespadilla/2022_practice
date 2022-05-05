@@ -7,7 +7,6 @@
 #include "hero.h"
 #include "Enemy.h"
 #include "GameMap.h"
-#include <stdlib.h>
 #include <time.h>
 
 class Game {
