@@ -210,9 +210,10 @@ bool Game::allEnemiesVanquished() {
 
 char Game::getInput()
 {
-	char input = _getch();
+	PBYTE input;
+	GetKeyboardState(input);
 
-	if (input == 27) {
+	if (input == // Need input here, but don't know how) {
 		promptQuit();
 	}
 	return input;
