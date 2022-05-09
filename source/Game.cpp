@@ -213,7 +213,8 @@ char Game::getInput()
 	PBYTE input;
 	GetKeyboardState(input);
 
-	if (input == // Need input here, but don't know how) {
+	// need to correc this, I'm certainly not using it right.
+	if (GetKeyState(VK_ESCAPE) ) {
 		promptQuit();
 	}
 	return input;
