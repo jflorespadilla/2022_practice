@@ -210,14 +210,30 @@ bool Game::allEnemiesVanquished() {
 
 char Game::getInput()
 {
-	PBYTE input;
-	GetKeyboardState(input);
-
-	// need to correc this, I'm certainly not using it right.
-	if (GetKeyState(VK_ESCAPE) ) {
-		promptQuit();
+	while (1) {
+		if (GetAsyncKeyState(VK_ESCAPE)) {
+			promptQuit();
+			return '\0';
+		}
+		if (GetAsyncKeyState(0x41)) {
+			return 'A';
+		}
+		if (GetAsyncKeyState(0x57)) {
+			return 'W';
+		}
+		if (GetAsyncKeyState(0x53)) {
+			return 'S';
+		}
+		if (GetAsyncKeyState(0x44)) {
+			return 'D';
+		}
+		if (GetAsyncKeyState(0x4E)) {
+			return 'N';
+		}
+		if (GetAsyncKeyState(0x59)) {
+			return 'Y';
+		}
 	}
-	return input;
 }
 
 void Game::promptQuit() {
