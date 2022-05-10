@@ -144,6 +144,7 @@
     <ClCompile Include="source\Game.cpp" />
     <ClCompile Include="source\GameMap.cpp" />
     <ClCompile Include="source\hero.cpp" />
+    <ClCompile Include="source\InputManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\Character.h" />
@@ -151,6 +152,7 @@
     <ClInclude Include="headers\Game.h" />
     <ClInclude Include="headers\GameMap.h" />
     <ClInclude Include="headers\hero.h" />
+    <ClInclude Include="headers\InputManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="maps\testmap.txt" />

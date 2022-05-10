@@ -210,30 +210,28 @@ bool Game::allEnemiesVanquished() {
 
 char Game::getInput()
 {
-	while (1) {
-		if (GetAsyncKeyState(VK_ESCAPE)) {
+		if (GetKeyState(VK_ESCAPE) & 0x01) {
 			promptQuit();
 			return '\0';
 		}
-		if (GetAsyncKeyState(0x41)) {
+		if (GetKeyState(0x41) & 0x01) {
 			return 'A';
 		}
-		if (GetAsyncKeyState(0x57)) {
+		if (GetKeyState(0x57) & 0x01) {
 			return 'W';
 		}
-		if (GetAsyncKeyState(0x53)) {
+		if (GetKeyState(0x53) & 0x01) {
 			return 'S';
 		}
-		if (GetAsyncKeyState(0x44)) {
+		if (GetKeyState(0x44) & 0x01) {
 			return 'D';
 		}
-		if (GetAsyncKeyState(0x4E)) {
+		if (GetKeyState(0x4E) & 0x01) {
 			return 'N';
 		}
-		if (GetAsyncKeyState(0x59)) {
+		if (GetKeyState(0x59) & 0x01) {
 			return 'Y';
 		}
-	}
 }
 
 void Game::promptQuit() {

@@ -1,0 +1,75 @@
+#include "../headers/InputManager.h"
+
+InputManager::InputManager()
+	:
+	fdwSaveOldMode(0),
+	inputKey('\0')
+{
+	hStdin = GetStdHandle(STD_INPUT_HANDLE);
+}
+
+InputManager::~InputManager() {
+
+}
+
+VOID InputManager::ErrorExit(const char* lpszMessage) {
+	std::cerr << "Error: " << lpszMessage << std::endl;
+	SetConsoleMode(hStdin, fdwSaveOldMode);
+	ExitProcess(0);
+}
+
+VOID InputManager::KeyEventProc(KEY_EVENT_RECORD ker) {
+	if (ker.bKeyDown) {
+		inputKey = ker.uChar.AsciiChar;
+	}
+	else {
+		inputKey = '\0';
+	}
+}
+
+char InputManager::GetKey()
+{
+	DWORD cNumRead, fdwMode, i;
+	INPUT_RECORD irInBuf[128];
+	int counter = 0;
+
+	if (hStdin == INVALID_HANDLE_VALUE) {
+		ErrorExit("GetStdHandle");
+	}
+	if (!GetConsoleMode(hStdin, &fdwSaveOldMode)) {
+		ErrorExit("GetConsoleMode");
+	}
+
+	fdwMode = ENABLE_LINE_INPUT;
+	if (!SetConsoleMode(hStdin, fdwMode)) {
+		ErrorExit("SetConsoleMode");
+	}
+
+	// Reding the handle for the next 100 input events
+	while (counter++ <= 100) {
+		if (!ReadConsoleInput(
+			hStdin,
+			irInBuf,
+			128,
+			&cNumRead)) {
+			ErrorExit("ReadConsoleInput");
+		}
+
+		for (i = 0; i < cNumRead; i++) {
+			switch (irInBuf[i].EventType) {
+			case KEY_EVENT:
+				KeyEventProc(irInBuf[i].Event.KeyEvent);
+				break;
+
+			case MENU_EVENT:
+				break;
+
+			default:
+				ErrorExit("Unknown event type");
+			}
+		}
+	}
+
+	SetConsoleMode(hStdin, fdwSaveOldMode);
+	return inputKey;
+}
