@@ -9,6 +9,7 @@
 #include "Enemy.h"
 #include "GameMap.h"
 #include <time.h>
+#include "InputManager.h"
 
 class Game {
 public:
@@ -35,5 +36,7 @@ private:
 	std::shared_ptr<hero> _character;
 	std::vector<Enemy*> _enemies;
 	std::shared_ptr<GameMap> _gameMap;
+	HANDLE _hStdin;
+	InputManager* _inputManager;
 };
 

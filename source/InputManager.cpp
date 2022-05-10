@@ -1,11 +1,11 @@
 #include "../headers/InputManager.h"
 
-InputManager::InputManager()
+InputManager::InputManager(HANDLE hStdin)
 	:
 	fdwSaveOldMode(0),
 	inputKey('\0')
 {
-	hStdin = GetStdHandle(STD_INPUT_HANDLE);
+	_hStdin = hStdin;
 }
 
 InputManager::~InputManager() {
@@ -14,7 +14,7 @@ InputManager::~InputManager() {
 
 VOID InputManager::ErrorExit(const char* lpszMessage) {
 	std::cerr << "Error: " << lpszMessage << std::endl;
-	SetConsoleMode(hStdin, fdwSaveOldMode);
+	SetConsoleMode(_hStdin, fdwSaveOldMode);
 	ExitProcess(0);
 }
 
@@ -33,22 +33,22 @@ char InputManager::GetKey()
 	INPUT_RECORD irInBuf[128];
 	int counter = 0;
 
-	if (hStdin == INVALID_HANDLE_VALUE) {
+	if (_hStdin == INVALID_HANDLE_VALUE) {
 		ErrorExit("GetStdHandle");
 	}
-	if (!GetConsoleMode(hStdin, &fdwSaveOldMode)) {
+	if (!GetConsoleMode(_hStdin, &fdwSaveOldMode)) {
 		ErrorExit("GetConsoleMode");
 	}
 
 	fdwMode = ENABLE_LINE_INPUT;
-	if (!SetConsoleMode(hStdin, fdwMode)) {
+	if (!SetConsoleMode(_hStdin, fdwMode)) {
 		ErrorExit("SetConsoleMode");
 	}
 
 	// Reding the handle for the next 100 input events
 	while (counter++ <= 100) {
 		if (!ReadConsoleInput(
-			hStdin,
+			_hStdin,
 			irInBuf,
 			128,
 			&cNumRead)) {
@@ -70,6 +70,6 @@ char InputManager::GetKey()
 		}
 	}
 
-	SetConsoleMode(hStdin, fdwSaveOldMode);
+	SetConsoleMode(_hStdin, fdwSaveOldMode);
 	return inputKey;
 }

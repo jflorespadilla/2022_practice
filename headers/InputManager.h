@@ -4,14 +4,14 @@
 
 class InputManager{
 public:
-	InputManager();
+	InputManager(HANDLE hStdin);
 	~InputManager();
 	VOID ErrorExit(const char* lpszMessage);
 	VOID KeyEventProc(KEY_EVENT_RECORD ker);
 	char GetKey();
 
 private:
-	HANDLE hStdin;
+	HANDLE _hStdin;
 	DWORD fdwSaveOldMode;
 	char inputKey;
 };

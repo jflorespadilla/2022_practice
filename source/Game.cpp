@@ -2,6 +2,8 @@
 
 Game::Game() {
 	_quit = false;
+	_hStdin = GetStdHandle(STD_INPUT_HANDLE);
+	_inputManager = new InputManager(_hStdin);
 }
 
 Game::~Game() {
@@ -208,30 +210,9 @@ bool Game::allEnemiesVanquished() {
 	return retVal;
 }
 
-char Game::getInput()
-{
-		if (GetKeyState(VK_ESCAPE) & 0x01) {
-			promptQuit();
-			return '\0';
-		}
-		if (GetKeyState(0x41) & 0x01) {
-			return 'A';
-		}
-		if (GetKeyState(0x57) & 0x01) {
-			return 'W';
-		}
-		if (GetKeyState(0x53) & 0x01) {
-			return 'S';
-		}
-		if (GetKeyState(0x44) & 0x01) {
-			return 'D';
-		}
-		if (GetKeyState(0x4E) & 0x01) {
-			return 'N';
-		}
-		if (GetKeyState(0x59) & 0x01) {
-			return 'Y';
-		}
+char Game::getInput() {
+	char key = _inputManager->GetKey();
+	return key;
 }
 
 void Game::promptQuit() {
