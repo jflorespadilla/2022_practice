@@ -1,6 +1,6 @@
 #include "../headers/InputManager.h"
 
-InputManager::InputManager(HANDLE hStdin)
+InputManager::InputManager(HANDLE& hStdin)
 	:
 	fdwSaveOldMode(0),
 	inputKey('\0')

@@ -4,7 +4,7 @@
 
 class InputManager{
 public:
-	InputManager(HANDLE hStdin);
+	InputManager(HANDLE& hStdin);
 	~InputManager();
 	VOID ErrorExit(const char* lpszMessage);
 	VOID KeyEventProc(KEY_EVENT_RECORD ker);
