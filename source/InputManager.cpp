@@ -1,11 +1,11 @@
 #include "../headers/InputManager.h"
 
-InputManager::InputManager(HANDLE& hStdin)
+InputManager::InputManager(HANDLE& hStdin, DWORD& fdwSaveOldMode)
 	:
-	fdwSaveOldMode(0),
 	inputKey('\0')
 {
 	_hStdin = hStdin;
+	_fdwSaveOldMode = fdwSaveOldMode;
 }
 
 InputManager::~InputManager() {
@@ -14,16 +14,13 @@ InputManager::~InputManager() {
 
 VOID InputManager::ErrorExit(const char* lpszMessage) {
 	std::cerr << "Error: " << lpszMessage << std::endl;
-	SetConsoleMode(_hStdin, fdwSaveOldMode);
+	SetConsoleMode(_hStdin, _fdwSaveOldMode);
 	ExitProcess(0);
 }
 
 VOID InputManager::KeyEventProc(KEY_EVENT_RECORD ker) {
 	if (ker.bKeyDown) {
 		inputKey = ker.uChar.AsciiChar;
-	}
-	else {
-		inputKey = '\0';
 	}
 }
 
@@ -36,7 +33,7 @@ char InputManager::GetKey()
 	if (_hStdin == INVALID_HANDLE_VALUE) {
 		ErrorExit("GetStdHandle");
 	}
-	if (!GetConsoleMode(_hStdin, &fdwSaveOldMode)) {
+	if (!GetConsoleMode(_hStdin, &_fdwSaveOldMode)) {
 		ErrorExit("GetConsoleMode");
 	}
 
@@ -70,6 +67,6 @@ char InputManager::GetKey()
 		}
 	}
 
-	SetConsoleMode(_hStdin, fdwSaveOldMode);
+	SetConsoleMode(_hStdin, _fdwSaveOldMode);
 	return inputKey;
 }

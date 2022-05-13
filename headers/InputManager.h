@@ -4,7 +4,7 @@
 
 class InputManager{
 public:
-	InputManager(HANDLE& hStdin);
+	InputManager(HANDLE& hStdin, DWORD& fdwSaveOldMode);
 	~InputManager();
 	VOID ErrorExit(const char* lpszMessage);
 	VOID KeyEventProc(KEY_EVENT_RECORD ker);
@@ -12,6 +12,6 @@ public:
 
 private:
 	HANDLE _hStdin;
-	DWORD fdwSaveOldMode;
+	DWORD _fdwSaveOldMode;
 	char inputKey;
 };
