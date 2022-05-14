@@ -37,7 +37,7 @@ char InputManager::GetKey()
 		ErrorExit("GetConsoleMode");
 	}
 
-	fdwMode = ENABLE_LINE_INPUT;
+	fdwMode = ENABLE_LINE_INPUT; // Experimenting with changing this mode
 	if (!SetConsoleMode(_hStdin, fdwMode)) {
 		ErrorExit("SetConsoleMode");
 	}
