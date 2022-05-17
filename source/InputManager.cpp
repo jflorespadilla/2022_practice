@@ -55,7 +55,7 @@ char InputManager::GetKey()
 		for (i = 0; i < cNumRead; i++) {
 			switch (irInBuf[i].EventType) {
 			case KEY_EVENT:
-				KeyEventProc(irInBuf[i].Event.KeyEvent); // Need to change this for instant processing I think
+				KeyEventProc(irInBuf[i].Event.KeyEvent); // Instead, process keyboard events instantly for next time
 				break;
 
 			case MENU_EVENT:
