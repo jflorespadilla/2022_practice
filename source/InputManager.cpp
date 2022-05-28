@@ -9,4 +9,13 @@ InputManager::~InputManager() {
 
 }
 
-// Gutting the input class. Going to study up and make some simple functions first.
+char InputManager::GetKey() {
+	// set the input handle
+
+	// Iterate over events
+		// Store key states
+	// Return released keys
+	return 0; // Stub return
+}
+
+
