@@ -18,6 +18,8 @@ char InputManager::GetKey() {
 	for (int i = 0; i < 256; i++) {
 		// from what I see online, I need to iterate over 256 keys.
 		// I hope more reading clears up some of the confusion I have over this.
+
+		// Still no clue what to do. Haven't read the docs.
 	}
 		// Store key states
 	// Return released keys
