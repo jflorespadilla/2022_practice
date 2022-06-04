@@ -19,7 +19,7 @@ char InputManager::GetKey() {
 		// from what I see online, I need to iterate over 256 keys.
 		// I hope more reading clears up some of the confusion I have over this.
 
-		// Another empty push
+		// Having a hard time coding. Another empty push.
 	}
 		// Store key states
 	// Return released keys
