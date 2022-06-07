@@ -3,7 +3,7 @@
 Game::Game() {
 	_quit = false;
 	_hStdin = GetStdHandle(STD_INPUT_HANDLE);
-	_inputManager = new InputManager(_hStdin, _fdwSaveOldMode);
+	_inputManager = new InputManager(&_hStdin);
 }
 
 Game::~Game() {

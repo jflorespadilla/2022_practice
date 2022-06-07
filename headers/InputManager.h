@@ -4,11 +4,10 @@
 
 class InputManager{
 public:
-	InputManager(HANDLE& hStdin, DWORD& fdwSaveOldMode);
+	InputManager(HANDLE* hStdin);
 	~InputManager();
 	char GetKey();
 
 private:
-	HANDLE _hStdin;
-	DWORD _fdwSaveOldMode;
+	HANDLE* _hStdin;
 };

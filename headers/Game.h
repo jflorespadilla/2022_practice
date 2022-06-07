@@ -37,7 +37,6 @@ private:
 	std::vector<Enemy*> _enemies;
 	std::shared_ptr<GameMap> _gameMap;
 	HANDLE _hStdin;
-	DWORD _fdwSaveOldMode;
 	InputManager* _inputManager;
 };
 

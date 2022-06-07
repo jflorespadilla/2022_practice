@@ -1,8 +1,7 @@
 #include "../headers/InputManager.h"
 
-InputManager::InputManager(HANDLE& hStdin, DWORD& fdwSaveOldMode) {
+InputManager::InputManager(HANDLE* hStdin) {
 	_hStdin = hStdin;
-	_fdwSaveOldMode = fdwSaveOldMode;
 }
 
 InputManager::~InputManager() {
@@ -10,12 +9,15 @@ InputManager::~InputManager() {
 }
 
 char InputManager::GetKey() {
-
-	for (int i = 0; i < 256; i++) {
-
+	INPUT_RECORD irInBuf[265];
+	DWORD recordsRead;
+	ReadConsoleInput(*_hStdin, irInBuf, 256, &recordsRead);
+	// It seems to be working, but I need to do more testing.
+	for (DWORD i = 0; i < recordsRead; i++) {
+		if (irInBuf[i].Event.KeyEvent.bKeyDown) {
+			return irInBuf[i].Event.KeyEvent.uChar.AsciiChar;
+		}
 	}
-
-	return 0;
 }
 
 
