@@ -21,7 +21,18 @@ char InputManager::GetKey() {
 }
 
 std::string InputManager::GetLine() {
+	INPUT_RECORD irInBuf[265];
+	DWORD fdwSaveOldMode, fdwMode;
+	DWORD recordsRead;
+	GetConsoleMode(_hStdin, &fdwSaveOldMode);
+	fdwMode = ENABLE_LINE_INPUT;
+	SetConsoleMode(_hStdin, fdwMode);
+
+	ReadConsoleInput(*_hStdin, irInBuf, 256, &recordsRead);
 	// Read input per line
+		// Build the return string
+
+	SetConsoleMode(_hStdin, fdwSaveOldMode);
 	return std::string();
 }
 
