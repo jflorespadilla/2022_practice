@@ -29,8 +29,12 @@ std::string InputManager::GetLine() {
 	SetConsoleMode(_hStdin, fdwMode);
 
 	ReadConsoleInput(*_hStdin, irInBuf, 256, &recordsRead);
-	// Read input per line
-		// Build the return string
+	
+	for (DWORD i = 0; i < recordsRead; i++) {
+		if (!irInBuf[i].Event.KeyEvent.bKeyDown) {
+			// return irInBuf[i].Event.KeyEvent.uChar.AsciiChar;
+		}
+	}
 
 	SetConsoleMode(_hStdin, fdwSaveOldMode);
 	return std::string();
