@@ -32,7 +32,7 @@ std::string InputManager::GetLine() {
 	
 	for (DWORD i = 0; i < recordsRead; i++) {
 		if (!irInBuf[i].Event.KeyEvent.bKeyDown) {
-			// return irInBuf[i].Event.KeyEvent.uChar.AsciiChar;
+			// Possibly use asynckeys here to load up string?
 		}
 	}
 
