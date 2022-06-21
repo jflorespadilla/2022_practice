@@ -32,8 +32,7 @@ std::string InputManager::GetLine() {
 	
 	for (DWORD i = 0; i < recordsRead; i++) {
 		if (!irInBuf[i].Event.KeyEvent.bKeyDown) {
-			// Going to rework the method to read the records.
-			// I'll need to see how some polling methods might work.
+			// More reading being done.
 		}
 	}
 
