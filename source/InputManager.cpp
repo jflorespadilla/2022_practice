@@ -32,7 +32,7 @@ std::string InputManager::GetLine() {
 	
 	for (DWORD i = 0; i < recordsRead; i++) {
 		if (!irInBuf[i].Event.KeyEvent.bKeyDown) {
-			// More reading being done.
+			// Should be able to push later tonight.
 		}
 	}
 
