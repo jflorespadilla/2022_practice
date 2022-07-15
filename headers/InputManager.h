@@ -1,15 +1,16 @@
 #pragma once
-#include <Windows.h>
 #include <iostream>
 #include <string>
 
+// Switching back to using iostream going to work on windows input in other projects.
+
 class InputManager{
 public:
-	InputManager(HANDLE* hStdin);
+	InputManager();
 	~InputManager();
 	char GetKey();
 	std::string GetLine();
 
 private:
-	HANDLE* _hStdin;
+
 };
