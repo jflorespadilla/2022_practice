@@ -1,7 +1,5 @@
 #pragma once
 #include <iostream>
-#include <Windows.h>
-#include <conio.h>
 #include <vector>
 #include <memory>
 #include "Character.h"
@@ -36,7 +34,6 @@ private:
 	std::shared_ptr<hero> _character;
 	std::vector<Enemy*> _enemies;
 	std::shared_ptr<GameMap> _gameMap;
-	HANDLE _hStdin;
 	InputManager* _inputManager;
 };
 
