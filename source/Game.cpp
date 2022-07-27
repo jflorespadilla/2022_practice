@@ -27,6 +27,8 @@ void Game::createCharacter() {
 	std::string name, ability;
 	int health, defense, attackDamage;
 
+	// implement the use of the input manager here
+
 	std::cout << "Create your character!\nName: ";
 	std::cin >> name;
 	std::cout << "Ability: ";
