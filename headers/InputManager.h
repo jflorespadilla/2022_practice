@@ -7,6 +7,7 @@ public:
 	InputManager();
 	~InputManager();
 	char GetKey();
+	int GetInt();
 	std::string GetLine();
 
 private:

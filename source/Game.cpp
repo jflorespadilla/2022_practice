@@ -27,18 +27,16 @@ void Game::createCharacter() {
 	std::string name, ability;
 	int health, defense, attackDamage;
 
-	// implement the use of the input manager here
-
 	std::cout << "Create your character!\nName: ";
-	std::cin >> name;
+	name = _inputManager->GetLine();
 	std::cout << "Ability: ";
-	std::cin >> ability;
+	ability = _inputManager->GetLine();
 	std::cout << "Health: ";
-	std::cin >> health;
+	health = _inputManager->GetInt();
 	std::cout << "Defense: ";
-	std::cin >> defense;
+	defense = _inputManager->GetInt();
 	std::cout << "Attack Damage: ";
-	std::cin >> attackDamage;
+	attackDamage = _inputManager->GetInt();
 
 	std::cout << "Creating Hero Character..." << std::endl << std::endl;
 	_character.reset(new hero(name, ability, health, defense, attackDamage));
