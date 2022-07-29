@@ -26,7 +26,6 @@ public:
 	void gameOver();
 	void generateEnemies();
 	bool allEnemiesVanquished();
-	char getInput();
 	void promptQuit();
 
 private:

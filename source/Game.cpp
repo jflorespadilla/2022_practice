@@ -15,7 +15,6 @@ void Game::run() {
 		std::cout << "Your character is " << _character->getName() << std::endl << std::endl;
 	}
 
-	char input;
 	srand(time(NULL));
 	while (!_quit) {
 		runActionSequence();
@@ -71,17 +70,20 @@ void Game::runCombat() {
 		displayEnemyHealth();
 
 		std::cout << "Attack? (Y/N): ";
-		switch (getInput()) {
+		switch (_inputManager->GetKey()) {
 		case 'y':
 		case 'Y':
 			std::cout << "\n Attack Option:\n";
 			for (int i = 0; i < _enemies.size(); i++) {
 				std::cout << i + 1<< ")" << _enemies[i]->getName() << " \n";
 			}
-			std::cin >> attackOption;
+
+			attackOption = _inputManager->GetInt();
 			_character->attackCharacter(*_enemies[attackOption - 1], roll);
 			break;
-		case 27:
+
+		case 'N':
+		case'n':
 			return;
 		}
 
@@ -89,7 +91,8 @@ void Game::runCombat() {
 
 		if (_character->checkIfAlive()) {
 			std::cout << "Continue combat? (Y/N) ";
-			if (getInput() == 'N' || getInput() == 'n') {
+			char promptAnswer = _inputManager->GetKey();
+			if ( promptAnswer == 'N' || promptAnswer == 'n') {
 				std::cout << "You have fled combat!" << std::endl << std::endl;
 				return;
 			}
@@ -115,7 +118,7 @@ void Game::runActionSequence() {
 
 		std::cout << "Navigate (WASD)" << std::endl << std::endl;
 
-		switch (getInput()) {
+		switch (_inputManager->GetKey()) {
 		case 'w':
 		case 'W':
 			_gameMap->updatePlayerCoordinates(0, 1);
@@ -132,8 +135,6 @@ void Game::runActionSequence() {
 		case 'D':
 			_gameMap->updatePlayerCoordinates(1, 0);
 			break;
-		case 27:
-			return;
 		}
 		_gameMap->getPlayerCoordinates(playerCursor);
 
@@ -180,7 +181,8 @@ void Game::generateGameMap(std::string mapFile) {
 void Game::gameOver() {
 	if (!_character->checkIfAlive()) {
 		std::cout << "Game Over.\nTry Again?\n(Y/N): ";
-		if (getInput() == 'n' || getInput() == 'N') {
+		char promptAnswer = _inputManager->GetKey();
+		if (promptAnswer == 'n' || promptAnswer == 'N') {
 			_quit = true;
 			return;
 		}
@@ -209,14 +211,10 @@ bool Game::allEnemiesVanquished() {
 	return retVal;
 }
 
-char Game::getInput() {
-	char key = _inputManager->GetKey();
-	return key;
-}
-
 void Game::promptQuit() {
 	std::cout << "\n\nAre you sure you want to quit? (Y/N): ";
-	if (getInput() == 'y' || getInput() == 'Y') {
+	char promptResponse = _inputManager->GetKey();
+	if ( promptResponse == 'y' || promptResponse == 'Y') {
 		_quit = true;
 		std::cout << "\n\nThank You for Playing! Bye!\n\n";
 	}
