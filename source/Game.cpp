@@ -47,6 +47,8 @@ void Game::displayCharacterHealth() {
 
 void Game::displayEnemyHealth() {
 	std::cout << "Enemy Health: ";
+
+	// Perhaps I should refactor this to use iterators. Good exercise.
 	for (int i = 0; i < _enemies.size(); i++) {
 		if (_enemies[i]->checkIfAlive()) {
 			std::cout <<  _enemies[i]->getHealth() << "\n";
