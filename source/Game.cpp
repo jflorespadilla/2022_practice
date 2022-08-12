@@ -46,11 +46,13 @@ void Game::displayCharacterHealth() {
 }
 
 void Game::displayEnemyHealth() {
+	std::vector<Enemy*>::const_iterator enemyIt;
+
 	std::cout << "Enemy Health: ";
 
-	for (int i = 0; i < _enemies.size(); i++) {
-		if (_enemies[i]->checkIfAlive()) {
-			std::cout <<  _enemies[i]->getHealth() << "\n";
+	for (enemyIt = _enemies.begin(); enemyIt != _enemies.end(); ++enemyIt) {
+		if ((*enemyIt)->checkIfAlive()) {
+			std::cout <<  (*enemyIt)->getHealth() << "\n";
 		}
 		else {
 			std::cout << "Enemy is vanquished\n";
@@ -60,7 +62,8 @@ void Game::displayEnemyHealth() {
 
 void Game::runCombat() {
 	generateEnemies();
-	int attackOption, roll, diceSize=20;
+	int attackOption, roll, diceSize=20, attackOptions = 1;
+	std::vector<Enemy*>::const_iterator enemyIt;
 
 	std::cout << "-----COMBAT ENTERED!!!-----" << std::endl << std::endl;
 	
@@ -75,17 +78,18 @@ void Game::runCombat() {
 		case 'y':
 		case 'Y':
 			std::cout << "\n Attack Option:\n";
-			for (int i = 0; i < _enemies.size(); i++) {
-				std::cout << i + 1<< ")" << _enemies[i]->getName() << " \n";
+			for (enemyIt = _enemies.begin(); enemyIt != _enemies.end() ; ++enemyIt) {
+				std::cout << attackOptions << ")" << (*enemyIt)->getName() << " \n";
+				attackOptions++;
 			}
 
 			attackOption = _inputManager->GetInt();
 			_character->attackCharacter(*_enemies[attackOption - 1], roll);
 			break;
-
+			// I think I need to rethink combat flow here
 		case 'N':
 		case'n':
-			return;
+			break;
 		}
 
 		combatEnemiesAttack(diceSize);
