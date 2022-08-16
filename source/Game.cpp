@@ -18,7 +18,9 @@ void Game::run() {
 	srand(time(NULL));
 	while (!_quit) {
 		runActionSequence();
-		gameOver();
+		if (!_quit) {
+			gameOver(); // A bit janky, but the state of the game can change
+		}
 	}
 }
 
@@ -86,10 +88,15 @@ void Game::runCombat() {
 			attackOption = _inputManager->GetInt();
 			_character->attackCharacter(*_enemies[attackOption - 1], roll);
 			break;
-			// I think I need to rethink combat flow here
+			// TODO - I need to rethink combat flow here
 		case 'N':
 		case'n':
 			break;
+		case 'q':
+		case 'Q':
+			promptQuit();
+			return;
+			break; // Probably not neccessary, but whatever
 		}
 
 		combatEnemiesAttack(diceSize);
@@ -140,6 +147,10 @@ void Game::runActionSequence() {
 		case 'D':
 			_gameMap->updatePlayerCoordinates(1, 0);
 			break;
+		case 'q':
+		case 'Q':
+			promptQuit();
+			return;
 		}
 		_gameMap->getPlayerCoordinates(playerCursor);
 
@@ -198,7 +209,7 @@ void Game::gameOver() {
 void Game::generateEnemies() {
 	_enemies.clear();
 
-	for (int i = 0; i < rand() % 57; i++) {
+	for (int i = 0; i < rand() % 22; i++) {
 		_enemies.push_back(new Enemy());
 	}
 }
