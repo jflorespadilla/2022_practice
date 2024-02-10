@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="source\Combat.cpp" />
     <ClCompile Include="source\Enemy.cpp" />
     <ClCompile Include="source\Game.cpp" />
     <ClCompile Include="source\GameMap.cpp" />
@@ -148,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\Character.h" />
+    <ClInclude Include="headers\Combat.h" />
     <ClInclude Include="headers\Enemy.h" />
     <ClInclude Include="headers\Game.h" />
     <ClInclude Include="headers\GameMap.h" />

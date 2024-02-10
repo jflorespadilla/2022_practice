@@ -31,7 +31,7 @@ public:
 private:
 	bool _quit;
 	std::shared_ptr<hero> _character;
-	std::vector<Enemy*> _enemies;
+	std::vector<Enemy*> _enemies; //Why did I make this a vector of pointers?
 	std::shared_ptr<GameMap> _gameMap;
 	InputManager* _inputManager;
 };
